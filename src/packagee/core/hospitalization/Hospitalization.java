@@ -35,9 +35,7 @@ public class Hospitalization {
     public Hospitalization(String id, Patient patient, Doctor doctor, LocalDate date, String reason, RoomType roomType, String observations) {
         this.id = id;
         this.patient = patient;
-        patient.setHospitalization(this);
         this.doctor = doctor;
-        doctor.addHospitalization(this);
         this.date = date;
         this.reason = reason;
         this.roomType = roomType;
@@ -47,9 +45,7 @@ public class Hospitalization {
     public Hospitalization(String id, Patient patient, Doctor doctor, LocalDate date, String reason, RoomType roomType, String observations, HospitalizationStatus hopsS) {
         this.id = id;
         this.patient = patient;
-        patient.setHospitalization(this);
         this.doctor = doctor;
-        doctor.addHospitalization(this);
         this.date = date;
         this.reason = reason;
         this.roomType = roomType;
