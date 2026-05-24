@@ -8,6 +8,6 @@ package packagee;
  *
  * @author paaoo
  */
-public class HospitalizationControler {
+public class HospitalizationController {
     
 }
