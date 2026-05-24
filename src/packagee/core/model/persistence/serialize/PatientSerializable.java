@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package packagee.core.model.serialize;
+package packagee.core.model.persistence.serialize;
 
 import java.time.LocalDate;
 import java.util.HashMap;
@@ -35,7 +35,6 @@ public class PatientSerializable implements Serializable{
         serializedData.put("gender", this.patient.getGender());
         serializedData.put("phone", this.patient.getPhone());
         serializedData.put("addres", this.patient.getAddress());
-        serializedData.put("appointments", this.patient.getAppointments());
 
         return serializedData;
     }
