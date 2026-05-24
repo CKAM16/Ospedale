@@ -20,7 +20,16 @@ public class Patient extends User {
     private String address;
     private ArrayList<Appointment> appointments;
     private Hospitalization hospitalization;
-
+    
+ 
+    public void update(Patient nuevosDatos) {
+        this.phone = nuevosDatos.getTelefono();
+        this.email = nuevosDatos.getEmail();
+        this birthdate = nuevosDatos.getFechaNacimiento();
+        this.address = nuevosDatos.getDireccion();
+        this.setUsername(nuevosDatos.getUsername()); 
+        this.setPassword(nuevosDatos.getPassword()); 
+    }
     public void setEmail(String email) {
         this.email = email;
     }
@@ -62,6 +71,8 @@ public class Patient extends User {
         this.address = address;
         this.appointments = new ArrayList<>();
     }
+    
+    
     
     
 }
