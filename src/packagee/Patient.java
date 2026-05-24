@@ -25,10 +25,26 @@ public class Patient extends User {
     public void update(Patient nuevosDatos) {
         this.phone = nuevosDatos.getTelefono();
         this.email = nuevosDatos.getEmail();
-        this birthdate = nuevosDatos.getFechaNacimiento();
+        this.birthdate = nuevosDatos.getBirthdate();
         this.address = nuevosDatos.getDireccion();
         this.setUsername(nuevosDatos.getUsername()); 
         this.setPassword(nuevosDatos.getPassword()); 
+    }
+    
+    public String getEmail() { 
+        return email; 
+    }
+    public LocalDate getBirthdate(){
+        return birthdate;
+    }
+    public boolean getGender() { 
+        return gender; 
+    }
+    public long getTelefono() {
+        return phone; 
+    }
+    public String getDireccion() {
+        return address; 
     }
     public void setEmail(String email) {
         this.email = email;

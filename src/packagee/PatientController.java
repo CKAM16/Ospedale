@@ -31,7 +31,7 @@ public class PatientController {
         }
 
        //(AAAA-MM-DD)
-        if (!p.getFechaNacimiento().matches("^\\d{4}-\\d{2}-\\d{2}$")) {
+        if (!p.getBirthdate().matches("^\\d{4}-\\d{2}-\\d{2}$")) {
             return new Response("ERROR", "Fecha de nacimiento inválida, formato AAAA-MM-DD");
         }
 
