@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package packagee;
+package packagee.core.UI;
 
 import packagee.core.model.hospitalization.Hospitalization;
 import packagee.core.Specialty;
@@ -44,11 +44,11 @@ public class AdminViewPanel extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panelRound1 = new packagee.PanelRound();
-        panelRound2 = new packagee.PanelRound();
+        panelRound1 = new packagee.core.UI.PanelRound();
+        panelRound2 = new packagee.core.UI.PanelRound();
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        panelRound3 = new packagee.PanelRound();
+        panelRound3 = new packagee.core.UI.PanelRound();
         ViewDoctorButton = new javax.swing.JButton();
         PatientViewButton = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
@@ -494,8 +494,8 @@ public class AdminViewPanel extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private packagee.PanelRound panelRound1;
-    private packagee.PanelRound panelRound2;
-    private packagee.PanelRound panelRound3;
+    private packagee.core.UI.PanelRound panelRound1;
+    private packagee.core.UI.PanelRound panelRound2;
+    private packagee.core.UI.PanelRound panelRound3;
     // End of variables declaration//GEN-END:variables
 }

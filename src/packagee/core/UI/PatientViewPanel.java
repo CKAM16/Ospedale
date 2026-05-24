@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package packagee;
+package packagee.core.UI;
 
 import packagee.core.model.hospitalization.Hospitalization;
 import packagee.core.model.user.admin.Administrator;
@@ -59,8 +59,8 @@ public class PatientViewPanel extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panelRound1 = new packagee.PanelRound();
-        panelRound2 = new packagee.PanelRound();
+        panelRound1 = new packagee.core.UI.PanelRound();
+        panelRound2 = new packagee.core.UI.PanelRound();
         jButton1 = new javax.swing.JButton();
         PatientViewTitle = new javax.swing.JLabel();
         BackButton = new javax.swing.JButton();
@@ -986,7 +986,7 @@ public class PatientViewPanel extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private packagee.PanelRound panelRound1;
-    private packagee.PanelRound panelRound2;
+    private packagee.core.UI.PanelRound panelRound1;
+    private packagee.core.UI.PanelRound panelRound2;
     // End of variables declaration//GEN-END:variables
 }
