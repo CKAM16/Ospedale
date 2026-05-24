@@ -3,7 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package packagee;
-import packagee.Response;
 
 /**
  *
@@ -11,20 +10,20 @@ import packagee.Response;
  */
 public class PatientController {
 
-  
     public Response registrarPaciente(Patient p) {
-        
         String idStr = String.valueOf(p.getId());
-       if (idStr.length() != 12 || !idStr.matches("\\d+")) {
-             return new Response("ERROR", "ID inválido, debe tener 12 dígitos numéricos");
-}
+        if (idStr.length() != 12 || !idStr.matches("\\d+")) {
+            return new Response("ERROR", "ID inválido, debe tener 12 dígitos numéricos");
+        }
 
         for (Patient existente : DataStore.pacientes) {
-           if (existente.getId() == p.getId()) {
+            if (existente.getId() == p.getId()) {
                 return new Response("ERROR", "Ya existe un paciente con ese ID");
             }
+        }
+
         String telefono = String.valueOf(p.getTelefono());
-        if (telefono.length() != 10 || telefono.matches("\\d+")) {
+        if (telefono.length() != 10 || !telefono.matches("\\d+")) {
             return new Response("ERROR", "Teléfono debe tener exactamente 10 dígitos");
         }
 
@@ -32,7 +31,6 @@ public class PatientController {
             return new Response("ERROR", "Email inválido, debe seguir el formato usuario@dominio.com");
         }
 
-       //(AAAA-MM-DD)
         if (!p.getBirthdate().toString().matches("^\\d{4}-\\d{2}-\\d{2}$")) {
             return new Response("ERROR", "Fecha de nacimiento inválida, formato AAAA-MM-DD");
         }
