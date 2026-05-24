@@ -63,4 +63,5 @@ public class Patient extends User {
         this.appointments = new ArrayList<>();
     }
     
+    
 }
