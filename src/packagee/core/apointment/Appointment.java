@@ -2,10 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package packagee;
+package packagee.core.apointment;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import packagee.core.user.doctor.Doctor;
+import packagee.core.user.patient.Patient;
+import packagee.core.prescription.Prescription;
+import packagee.core.Specialty;
 
 /**
  *
