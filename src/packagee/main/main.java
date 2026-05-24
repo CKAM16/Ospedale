@@ -17,14 +17,7 @@ import packagee.core.model.persistence.*;
 public class main {
     
     public static void main(String[] args) throws IOException {
-        
-        DoctorViewPanel doctorView = new DoctorViewPanel();
-        PatientViewPanel patientView = new PatientViewPanel();
-        AdminViewPanel adminView = new AdminViewPanel();
-        MainMenu mainMenu = new MainMenu();
-        
-        ViewsManager UI = new ViewsManager(doctorView, patientView, adminView, mainMenu);
-        
+ 
         JSONLoad json = new JSONLoad();
         json.load("json/users.json");
         
@@ -38,9 +31,16 @@ public class main {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainMenu().setVisible(true);
-            }
+                
+                DoctorViewPanel doctorView = new DoctorViewPanel();
+                PatientViewPanel patientView = new PatientViewPanel();
+                AdminViewPanel adminView = new AdminViewPanel();
+                MainMenu mainMenu = new MainMenu();
+
+                ViewsManager UI = new ViewsManager(doctorView, patientView, adminView, mainMenu);
+                
+                UI.start();
+            };
         });
-        UI.start();
     }
 }
