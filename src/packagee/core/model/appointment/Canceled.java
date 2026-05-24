@@ -29,4 +29,9 @@ public class Canceled implements AppointmentStatusInterface {
     public String getFollowUp() {
         return null;
     }
+
+    @Override
+    public String getStatus() {
+        return "Canceled";
+    }
 }

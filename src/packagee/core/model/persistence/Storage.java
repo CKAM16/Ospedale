@@ -6,6 +6,7 @@ package packagee.core.model.persistence;
 
 import java.util.ArrayList;
 import packagee.core.model.user.User;
+import packagee.core.model.user.patient.Patient;
 
 /**
  *
@@ -14,6 +15,11 @@ import packagee.core.model.user.User;
 public class Storage {
 
     private static Storage instance;
+    public static Iterable<User> usuarios;
+
+    public static Iterable<Patient> getPersons() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 
     private ArrayList<User> persons;
     

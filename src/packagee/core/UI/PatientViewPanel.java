@@ -6,7 +6,7 @@ package packagee.core.UI;
 
 import packagee.core.model.hospitalization.Hospitalization;
 import packagee.core.model.user.admin.Administrator;
-import packagee.core.Specialty;
+import packagee.core.model.user.doctor.Specialty;
 import packagee.core.model.room.RoomType;
 import packagee.core.model.user.User;
 import packagee.core.model.user.patient.Patient;
@@ -34,18 +34,18 @@ public class PatientViewPanel extends javax.swing.JFrame {
     private ArrayList<Appointment> appointments;
     private ArrayList<Hospitalization> hospitalizations;
 
-    public PatientViewPanel(User user,Patient patient, ArrayList<User> users, ArrayList<Appointment>appointments, ArrayList<Hospitalization> hospitalizations) {
+    public PatientViewPanel() {
         initComponents();
-        this.user = user;
-        this.users = users;
-        this.patient = patient;
-        this.hospitalizations = hospitalizations;
-        this.appointments = appointments;
-        if (user instanceof Administrator) {
-            BackButton.setVisible(true);
-        } else {
-            BackButton.setVisible(false);
-        }
+        //this.user = user;
+        //this.users = users;
+        //this.patient = patient;
+        //this.hospitalizations = hospitalizations;
+        //this.appointments = appointments;
+        //if (user instanceof Administrator) {
+          //  BackButton.setVisible(true);
+        //} else {
+         //   BackButton.setVisible(false);
+        //}
         this.setBackground(new Color(0, 0, 0, 0));
         this.setLocationRelativeTo(null);
     }
@@ -834,7 +834,7 @@ public class PatientViewPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
-        AdminViewPanel admin = new AdminViewPanel(user, users,hospitalizations, appointments);
+        AdminViewPanel admin = new AdminViewPanel();
         this.setVisible(false);
         admin.setVisible(true);
     }//GEN-LAST:event_BackButtonActionPerformed

@@ -34,5 +34,10 @@ public class Request implements AppointmentStatusInterface {
         return null;
     }
     
+    @Override
+    public String getStatus() {
+        return "Request";
+    }
+    
 }
 

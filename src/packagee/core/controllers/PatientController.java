@@ -2,7 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package packagee;
+package packagee.core.controllers;
+
+import packagee.core.model.persistence.Storage;
+import packagee.core.model.user.patient.Patient;
+import packagee.core.controllers.util.Response;
 
 /**
  *
@@ -16,13 +20,13 @@ public class PatientController {
         if (p.getId().length() != 12 || !p.getId().matches("\\d+")) {
             return new Response("ERROR", "ID inválido, debe tener 12 dígitos numéricos");
         }
-        for (Patient existente : DataStore.pacientes) {
+        for (Patient existente : Storage.getPersons()) {
             if (existente.getId().equals(p.getId())) {
                 return new Response("ERROR", "Ya existe un paciente con ese ID");
             }
         }
 
-        if (p.getTelefono().length() != 10 || !p.getTelefono().matches("\\d+")) {
+        if (p.getPhone().length() || !p.getPhone().matches("\\d+")) {
             return new Response("ERROR", "Teléfono debe tener exactamente 10 dígitos");
         }
 

@@ -7,7 +7,6 @@ package packagee.core.model.user.doctor;
 import packagee.core.model.appointment.Appointment;
 import java.util.ArrayList;
 import packagee.core.model.hospitalization.Hospitalization;
-import packagee.core.Specialty;
 import packagee.core.model.user.User;
 
 /**

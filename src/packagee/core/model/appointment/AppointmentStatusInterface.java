@@ -14,4 +14,5 @@ public interface AppointmentStatusInterface {
     public abstract String getObservations();
     public abstract String getRecommendedTreatment();
     public abstract String getFollowUp();
+    public abstract String getStatus();
 }

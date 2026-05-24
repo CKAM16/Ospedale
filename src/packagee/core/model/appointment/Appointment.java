@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import packagee.core.model.user.doctor.Doctor;
 import packagee.core.model.user.patient.Patient;
 import packagee.core.model.prescription.Prescription;
-import packagee.core.Specialty;
+import packagee.core.model.user.doctor.Specialty;
 
 /**
  *
@@ -33,6 +33,7 @@ public class Appointment {
     private String observations;
     private String recommendedTreatment;
     private String followUp;
+    private String status;
 
     public void setDiagnosis(String diagnosis) {
         this.diagnosis = diagnosis;
@@ -87,6 +88,14 @@ public class Appointment {
 
     public boolean addPrescription(Prescription prescrip) {
         return this.prescriptions.add(prescrip);
+    }
+    
+    public String getStatus(){
+        return this.status;
+    }
+    
+    public void setStatus(String status){
+        this.status = status;
     }
     
 }

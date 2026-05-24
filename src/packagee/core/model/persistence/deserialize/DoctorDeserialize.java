@@ -7,7 +7,7 @@ package packagee.core.model.persistence.deserialize;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import org.json.JSONObject;
-import packagee.core.Specialty;
+import packagee.core.model.user.doctor.Specialty;
 import packagee.core.model.appointment.Appointment;
 import packagee.core.model.hospitalization.Hospitalization;
 import packagee.core.model.user.User;

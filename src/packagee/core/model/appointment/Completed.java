@@ -41,4 +41,9 @@ public class Completed implements AppointmentStatusInterface {
     public String getFollowUp() {
         return this.followUp;
     }
+    
+    @Override
+    public String getStatus() {
+        return "Completed";
+    }
 }

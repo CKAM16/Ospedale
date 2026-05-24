@@ -5,7 +5,7 @@
 package packagee.core.UI;
 
 import packagee.core.model.hospitalization.Hospitalization;
-import packagee.core.Specialty;
+import packagee.core.model.user.doctor.Specialty;
 import packagee.core.model.user.User;
 import packagee.core.model.user.patient.Patient;
 import packagee.core.model.user.doctor.Doctor;
@@ -25,12 +25,12 @@ public class AdminViewPanel extends javax.swing.JFrame {
     private ArrayList<Appointment>appointments;
     private ArrayList<Hospitalization>hospitalizations;
     private User user;
-    public AdminViewPanel(User user, ArrayList<User>users,ArrayList<Hospitalization> hospitalizations, ArrayList<Appointment> appointments) {
+    public AdminViewPanel() {
         initComponents();
-        this.user = user;
-        this.users = users;
-        this.hospitalizations = hospitalizations;
-        this.appointments = appointments;
+        //this.user = user;
+        //this.users = users;
+        //this.hospitalizations = hospitalizations;
+        //this.appointments = appointments;
         this.setBackground(new Color(0, 0, 0, 0));
         this.setLocationRelativeTo(null);
     }
@@ -438,7 +438,7 @@ public class AdminViewPanel extends javax.swing.JFrame {
             if(use.getId() == idDoctor)
                 temp =(Doctor) user;
         }
-        DoctorViewPanel doctor = new DoctorViewPanel(user,temp, users, hospitalizations,appointments);
+        DoctorViewPanel doctor = new DoctorViewPanel();
         this.setVisible(false);
         doctor.setVisible(true);
     }//GEN-LAST:event_ViewDoctorButtonActionPerformed
@@ -457,7 +457,7 @@ public class AdminViewPanel extends javax.swing.JFrame {
             if(use.getId() == idPatient)
                 temp =(Patient) user;
         }
-        PatientViewPanel patient = new PatientViewPanel(user,temp,users,appointments,hospitalizations);
+        PatientViewPanel patient = new PatientViewPanel();
         this.setVisible(false);
         patient.setVisible(true);
     }//GEN-LAST:event_PatientViewButtonActionPerformed

@@ -8,12 +8,11 @@ import packagee.core.model.hospitalization.Hospitalization;
 import packagee.core.model.user.admin.Administrator;
 import packagee.core.model.hospitalization.HospitalizationStatus;
 import packagee.core.model.prescription.Prescription;
-import packagee.core.Specialty;
+import packagee.core.model.user.doctor.Specialty;
 import packagee.core.model.room.RoomType;
 import packagee.core.model.user.User;
 import packagee.core.model.user.patient.Patient;
 import packagee.core.model.user.doctor.Doctor;
-import packagee.core.model.appointment.AppointmentStatus;
 import packagee.core.model.appointment.Appointment;
 import java.awt.Color;
 import java.time.LocalDate;
@@ -35,17 +34,17 @@ public class DoctorViewPanel extends javax.swing.JFrame {
     private ArrayList<Appointment>appointments;
     private Doctor doctor;
     private Patient patient;
-    public DoctorViewPanel(User user,Doctor doc, ArrayList<User> users,ArrayList<Hospitalization> hospitalizations,ArrayList<Appointment> appointments) {
+    public DoctorViewPanel() {
         initComponents();
-        this.user = user;
-        this.users =users;
-        this.doctor = doc;
-        this.hospitalizations = hospitalizations;
-        this.appointments = appointments;
-        if (user instanceof Administrator)
-            jButton11.setVisible(true);
-        else    
-            jButton11.setVisible(false);
+       // this.user = user;
+       // this.users =users;
+       // this.doctor = doc;
+       // this.hospitalizations = hospitalizations;
+       // this.appointments = appointments;
+       // if (user instanceof Administrator)
+           // jButton11.setVisible(true);
+       // else    
+          //  jButton11.setVisible(false);
         this.setBackground(new Color(0, 0, 0, 0));
         this.setLocationRelativeTo(null);
     }
@@ -1133,8 +1132,8 @@ public class DoctorViewPanel extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) DoctorAppointmentsView.getModel();
         model.setRowCount(0);
         for (Appointment a : d.getAppointments()) {
-            if (a.getStatus().equals(AppointmentStatus.PENDING)) {
-                model.addRow(new Object[]{a.getId(), a.getDatetime().toString(), a.getPatient().getFirstname() + " " + a.getDoctor().getLastname(), a.getSpecialty().name(), a.isType() ? "In person" : "Virtual", a.getStatus().name()});
+            if (a.getStatus().equals("Pending")) {
+                model.addRow(new Object[]{a.getId(), a.getDatetime().toString(), a.getPatient().getFirstname() + " " + a.getDoctor().getLastname(), a.getSpecialty().name(), a.isType() ? "In person" : "Virtual", a.getStatus()});
             }
         }
     }//GEN-LAST:event_PendingAppointmentsButtonActionPerformed
@@ -1172,7 +1171,7 @@ public class DoctorViewPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton12ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-        AdminViewPanel admin = new AdminViewPanel(user,users,hospitalizations, appointments);
+        AdminViewPanel admin = new AdminViewPanel();
         this.setVisible(false);
         admin.setVisible(true);
     }//GEN-LAST:event_jButton11ActionPerformed

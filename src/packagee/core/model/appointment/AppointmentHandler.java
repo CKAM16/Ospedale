@@ -22,6 +22,7 @@ public class AppointmentHandler {
         appointment.setFollowUp(I.getFollowUp());
         appointment.setObservations(I.getObservations());
         appointment.setRecommendedTreatment(I.getRecommendedTreatment());
+        appointment.setStatus(I.getStatus());
         
     }
 }
