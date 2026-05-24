@@ -2,9 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package packagee.core.prescription;
+package packagee.core.model.prescription;
 
-import packagee.core.apointment.Appointment;
+import packagee.core.model.appointment.Appointment;
 
 /**
  *

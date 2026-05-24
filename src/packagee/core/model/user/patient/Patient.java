@@ -2,13 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package packagee.core.user.patient;
+package packagee.core.model.user.patient;
 
-import packagee.core.user.User;
-import packagee.core.apointment.Appointment;
+import packagee.core.model.user.User;
+import packagee.core.model.appointment.Appointment;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import packagee.core.hospitalization.Hospitalization;
+import packagee.core.model.hospitalization.Hospitalization;
 
 /**
  *
@@ -64,6 +64,26 @@ public class Patient extends User {
         this.phone = phone;
         this.address = address;
         this.appointments = new ArrayList<>();
+    }
+    
+    public String getEmail(){
+        return this.email;
+    }
+    
+    public LocalDate getDate(){
+        return this.birthdate;
+    }
+    
+    public long getPhone(){
+        return this.phone;
+    }
+    
+    public String getAddress(){
+        return this.address;
+    }
+    
+    public boolean getGender(){
+        return this.gender;
     }
     
 }

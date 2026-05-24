@@ -2,9 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package packagee.core.user.admin;
+package packagee.core.model.user.admin;
 
-import packagee.core.user.User;
+import packagee.core.model.user.User;
 
 /**
  *
