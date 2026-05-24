@@ -11,14 +11,22 @@
             <file>file:/C:/Users/harry/OneDrive/Documentos/NetBeansProjects/Ospedale/src/packagee/PanelRound.java</file>
             <file>file:/C:/Users/harry/OneDrive/Documentos/NetBeansProjects/Ospedale/src/packagee/core/model/appointment/Appointment.java</file>
             <file>file:/C:/Users/harry/OneDrive/Documentos/NetBeansProjects/Ospedale/src/packagee/core/model/appointment/AppointmentStatusInterface.java</file>
-            <file>file:/C:/Users/harry/OneDrive/Documentos/NetBeansProjects/Ospedale/src/packagee/core/model/serialize/DoctorSerializable.java</file>
+            <file>file:/C:/Users/harry/OneDrive/Documentos/NetBeansProjects/Ospedale/src/packagee/core/model/persistence/serialize/DoctorSerializable.java</file>
             <file>file:/C:/Users/harry/OneDrive/Documentos/NetBeansProjects/Ospedale/src/packagee/core/model/user/doctor/Doctor.java</file>
-            <file>file:/C:/Users/harry/OneDrive/Documentos/NetBeansProjects/Ospedale/src/packagee/core/model/serialize/AdminSerializable.java</file>
-            <file>file:/C:/Users/harry/OneDrive/Documentos/NetBeansProjects/Ospedale/src/packagee/core/model/persistence/JSONUpload.java</file>
-            <file>file:/C:/Users/harry/OneDrive/Documentos/NetBeansProjects/Ospedale/src/packagee/core/model/serialize/PatientSerializable.java</file>
+            <file>file:/C:/Users/harry/OneDrive/Documentos/NetBeansProjects/Ospedale/src/packagee/core/model/persistence/serialize/AdminSerializable.java</file>
+            <file>file:/C:/Users/harry/OneDrive/Documentos/NetBeansProjects/Ospedale/src/packagee/core/model/persistence/JSONLoad.java</file>
+            <file>file:/C:/Users/harry/OneDrive/Documentos/NetBeansProjects/Ospedale/src/packagee/core/model/persistence/serialize/PatientSerializable.java</file>
             <file>file:/C:/Users/harry/OneDrive/Documentos/NetBeansProjects/Ospedale/src/packagee/core/model/persistence/Observer/Observable.java</file>
             <file>file:/C:/Users/harry/OneDrive/Documentos/NetBeansProjects/Ospedale/src/packagee/core/model/persistence/Observer/Observer.java</file>
             <file>file:/C:/Users/harry/OneDrive/Documentos/NetBeansProjects/Ospedale/src/packagee/core/model/persistence/Storage.java</file>
+            <file>file:/C:/Users/harry/OneDrive/Documentos/NetBeansProjects/Ospedale/src/packagee/core/model/persistence/deserialize/Deserializable.java</file>
+            <file>file:/C:/Users/harry/OneDrive/Documentos/NetBeansProjects/Ospedale/src/packagee/core/model/persistence/serialize/Serializable.java</file>
+            <file>file:/C:/Users/harry/OneDrive/Documentos/NetBeansProjects/Ospedale/src/packagee/core/model/persistence/deserialize/PatientDeserialize.java</file>
+            <file>file:/C:/Users/harry/OneDrive/Documentos/NetBeansProjects/Ospedale/src/packagee/core/model/user/patient/Patient.java</file>
+            <file>file:/C:/Users/harry/OneDrive/Documentos/NetBeansProjects/Ospedale/src/packagee/core/model/user/User.java</file>
+            <file>file:/C:/Users/harry/OneDrive/Documentos/NetBeansProjects/Ospedale/src/packagee/core/model/persistence/deserialize/DoctorDeserialize.java</file>
+            <file>file:/C:/Users/harry/OneDrive/Documentos/NetBeansProjects/Ospedale/src/packagee/core/model/persistence/deserialize/AdminDeserialize.java</file>
+            <file>file:/C:/Users/harry/OneDrive/Documentos/NetBeansProjects/Ospedale/src/packagee/core/model/persistence/JSONSave.java</file>
         </group>
     </open-files>
 </project-private>

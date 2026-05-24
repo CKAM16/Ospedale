@@ -31,7 +31,7 @@ public class JSONLoad {
             JSONObject object = users.getJSONObject(i);
             
             for (Deserializable d : deserializables){
-                if (d.equals(object.get("Type"))){
+                if (d.getType() == object.get("Type")){
                     storage.addPerson(d.user(object));
                 }
             }
