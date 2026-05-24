@@ -31,6 +31,7 @@ public abstract class User {
     protected String firstname;
     protected String lastname;
     protected String password;
+    private String role;
 
     public User(long id, String username, String firstname, String lastname, String password) {
         this.id = id;
@@ -38,6 +39,12 @@ public abstract class User {
         this.firstname = firstname;
         this.lastname = lastname;
         this.password = password;
+        this.role = role;
+    }
+    
+    public String getRole(){
+        return role;
+   
     }
 
     public long getId() {
