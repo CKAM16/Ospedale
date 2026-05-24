@@ -2,13 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package packagee.core.apointment;
+package packagee.core.model.appointment;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import packagee.core.user.doctor.Doctor;
-import packagee.core.user.patient.Patient;
-import packagee.core.prescription.Prescription;
+import packagee.core.model.user.doctor.Doctor;
+import packagee.core.model.user.patient.Patient;
+import packagee.core.model.prescription.Prescription;
 import packagee.core.Specialty;
 
 /**
@@ -29,7 +29,6 @@ public class Appointment {
     }
     private boolean type;
     private ArrayList<Prescription> prescriptions;
-    private AppointmentStatus status;
     private String diagnosis;
     private String observations;
     private String recommendedTreatment;
@@ -59,14 +58,9 @@ public class Appointment {
         this.datetime = datetime;
         this.reason = reason;
         this.type = type;
-        this.status = AppointmentStatus.REQUESTED;
         this.prescriptions = new ArrayList<>();
     }
-
-    public void setStatus(AppointmentStatus status) {
-        this.status = status;
-    }
-
+    
     public String getId() {
         return id;
     }
@@ -85,10 +79,6 @@ public class Appointment {
 
     public boolean isType() {
         return type;
-    }
-
-    public AppointmentStatus getStatus() {
-        return status;
     }
 
     public Patient getPatient() {

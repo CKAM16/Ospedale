@@ -4,12 +4,12 @@
  */
 package packagee;
 
-import packagee.core.hospitalization.Hospitalization;
-import packagee.core.user.admin.Administrator;
-import packagee.core.user.User;
-import packagee.core.user.patient.Patient;
-import packagee.core.user.doctor.Doctor;
-import packagee.core.apointment.Appointment;
+import packagee.core.model.hospitalization.Hospitalization;
+import packagee.core.model.user.admin.Administrator;
+import packagee.core.model.user.User;
+import packagee.core.model.user.patient.Patient;
+import packagee.core.model.user.doctor.Doctor;
+import packagee.core.model.appointment.Appointment;
 import com.formdev.flatlaf.FlatDarkLaf;
 import java.awt.Color;
 import java.time.LocalDate;

@@ -2,11 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package packagee.core.hospitalization;
+package packagee.core.model.hospitalization;
 
-import packagee.core.room.RoomType;
-import packagee.core.user.patient.Patient;
-import packagee.core.user.doctor.Doctor;
+import packagee.core.model.room.RoomType;
+import packagee.core.model.user.patient.Patient;
+import packagee.core.model.user.doctor.Doctor;
 import java.time.LocalDate;
 
 /**
@@ -26,9 +26,9 @@ public class Hospitalization {
     private String reason;
     private RoomType roomType;
     private String observations;
-    private HospitalizationStatus status;
+    private String status;
 
-    public void setStatus(HospitalizationStatus status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
@@ -40,9 +40,9 @@ public class Hospitalization {
         this.reason = reason;
         this.roomType = roomType;
         this.observations = observations;
-        this.status = HospitalizationStatus.REQUESTED;
+        this.status = "Requested";
     }
-    public Hospitalization(String id, Patient patient, Doctor doctor, LocalDate date, String reason, RoomType roomType, String observations, HospitalizationStatus hopsS) {
+    public Hospitalization(String id, Patient patient, Doctor doctor, LocalDate date, String reason, RoomType roomType, String observations, String hopsS) {
         this.id = id;
         this.patient = patient;
         this.doctor = doctor;

@@ -2,12 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package packagee.core.hospitalization;
+package packagee.core.model.hospitalization;
 
 import java.time.LocalDate;
-import packagee.core.room.RoomType;
-import packagee.core.user.doctor.Doctor;
-import packagee.core.user.patient.Patient;
+import packagee.core.model.room.RoomType;
+import packagee.core.model.user.doctor.Doctor;
+import packagee.core.model.user.patient.Patient;
 
 /**
  *
@@ -20,12 +20,8 @@ public class HospitalizationHandler {
     public HospitalizationHandler(Hospitalization hosp){
         this.hosp = hosp;
     }
-    public boolean cancel(){
-        hosp.setStatus(HospitalizationStatus.CANCELED);
-        return true;
-    }
-    public boolean activate(Hospitalization hosp) {
-        hosp.setStatus(HospitalizationStatus.ONGOING);
-        return true;
+    
+    public void changeStatus(HospitalizationStatus S){
+        hosp.setStatus(S.getStatus());
     }
 }
