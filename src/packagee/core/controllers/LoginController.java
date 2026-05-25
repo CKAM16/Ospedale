@@ -24,7 +24,7 @@ public class LoginController {
                 return new Response("SUCCESS", u.getClass().toString());
             }
         }
-        System.out.println("NOOB");
+
         return new Response("ERROR", "Usuario o contraseña incorrectos");
     }
 

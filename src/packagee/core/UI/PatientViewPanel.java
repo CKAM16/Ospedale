@@ -11,7 +11,7 @@ import packagee.core.model.room.RoomType;
 import packagee.core.model.user.User;
 import packagee.core.model.user.patient.Patient;
 import packagee.core.model.user.doctor.Doctor;
-import packagee.core.model.appointment.AppointmentStatus;
+
 import packagee.core.model.appointment.Appointment;
 import java.awt.Color;
 import java.time.LocalDate;
@@ -25,6 +25,7 @@ import packagee.core.controllers.AppointmentController;
 import packagee.core.controllers.DoctorController;
 import packagee.core.controllers.HospitalizationController;
 import packagee.core.controllers.PatientController;
+import packagee.core.controllers.util.Response;
 import packagee.core.model.persistence.Storage;
 
 /**
@@ -811,29 +812,20 @@ public class PatientViewPanel extends javax.swing.JFrame {
 
     private void CancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelButtonActionPerformed
         String idAppointment = IDAppointmentButton.getItemAt(IDAppointmentButton.getSelectedIndex());
-        for(Appointment ap: this.appointments){
-            if (ap.getId().equals(idAppointment)) {
-                ap.setStatus(AppointmentStatus.CANCELED);
-            }
-        }
+        appointmentController.cancelarCita(idAppointment, idAppointment);
     }//GEN-LAST:event_CancelButtonActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        String firstname = FirstNameInput.getText();
-        String lastname = LastNameInput.getText();
-  
-        String gender = String.valueOf(GenderButton.getSelectedIndex());
-        String birth = BirthDateInput.getText();
-        String address = AddressInput.getText();
-        String phone = PhoneInput.getText();
-        String email = EmailInput.getText();
-        String user = ModifYUserInput.getText();
+
         String password = ModifyPasswordInput.getText();
         String comPassword = ModifyConfirmPasswordInput.getText();
-        
-        if (comPassword.equals(password)) {
-            patientController.actualizarPaciente(email, patient);
+
+        if (!password.equals(comPassword)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Passwords do not match.");
+            return;
         }
+        Response r = patientController.actualizarPaciente(String.valueOf(patient.getId()),FirstNameInput.getText(),LastNameInput.getText(),String.valueOf(GenderButton.getSelectedIndex()),BirthDateInput.getText(),AddressInput.getText(),PhoneInput.getText(), EmailInput.getText(), ModifYUserInput.getText(), password, comPassword);
+        javax.swing.JOptionPane.showMessageDialog(this, r.getMessage());
 
     }//GEN-LAST:event_jButton9ActionPerformed
 
@@ -875,6 +867,7 @@ public class PatientViewPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_DoctorButtonActionPerformed
 
     private void CreateAppointmentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateAppointmentButtonActionPerformed
+
         String appointDate = AppointmentDateInput.getText();
         LocalDate appointmentDate = LocalDate.of(Integer.parseInt(appointDate.substring(0, 4)), Integer.parseInt(appointDate.substring(5, 7)), Integer.parseInt(appointDate.substring(8)));
         LocalTime appointmentHour = LocalTime.of(Integer.parseInt(AppointmentTimeInput.getText().substring(0, 2)), Integer.parseInt(AppointmentTimeInput.getText().substring(3)));
@@ -898,11 +891,12 @@ public class PatientViewPanel extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) AppointmentHistory.getModel();
         model.setRowCount(0);
         for (Appointment a : p.getAppointments()) {
-            model.addRow(new Object[]{a.getId(), a.getDatetime().toString(), a.getDoctor().getFirstname() + " " + a.getDoctor().getLastname(), a.getSpecialty().name(), a.isType() ? "In-person" : "Remote", a.getStatus().name()});
+            model.addRow(new Object[]{a.getId(), a.getDatetime().toString(), a.getDoctor().getFirstname() + " " + a.getDoctor().getLastname(), a.getSpecialty().name(), a.isType() ? "In-person" : "Remote", a.getStatus()});
         }
     }//GEN-LAST:event_jButton6ActionPerformed
 
-    private void CreateHospitalizationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateHospitalizationButtonActionPerformed
+    private void CreateHospitalizationButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                            
+//GEN-FIRST:event_CreateHospitalizationButtonActionPerformed
         String hospitalizationReason = HospitalizationReasonInput.getText();
         String idDoctor = HospitalizationDoctorButton.getItemAt(HospitalizationDoctorButton.getSelectedIndex());
         Doctor doc = null;

@@ -232,5 +232,18 @@
         "assignedOffice": "O-408",
         "username": "dra_ibarra",
         "lastname": "Ibarra"
+    },
+    {
+        "firstname": "a",
+        "password": "1",
+        "birthdate": "1002-04-04",
+        "gender": false,
+        "phone": 3014461077,
+        "addres": "aaa",
+        "id": 111111111111,
+        "type": "class packagee.core.model.user.patient.Patient",
+        "email": "a@g.com",
+        "username": "aaa1",
+        "lastname": "a"
     }
 ]}

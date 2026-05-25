@@ -26,6 +26,8 @@ import packagee.core.controllers.HospitalizationController;
 import packagee.core.controllers.PatientController;
 import packagee.core.controllers.util.Response;
 import packagee.core.model.appointment.AppointmentHandler;
+import packagee.core.model.persistence.DataStore;
+import packagee.core.model.persistence.Storage;
 
 /**
  *
@@ -1170,7 +1172,7 @@ public class DoctorViewPanel extends javax.swing.JFrame {
         String comPassword = DoctorPasswordConfirmation.getText();
         Specialty specialty = Specialty.valueOf(spec.replaceAll(" &", "").replaceAll(" ", "_"));
         if (password.equals(comPassword)) {
-            for(User doc: this.users){
+            for(User doc: Storage.getInstance().getPersons()){
                 if (doctor.getId() == doc.getId()) {
                     doctor.setFirstname(firstname);
                     doctor.setLastname(lastname);
@@ -1212,7 +1214,7 @@ public class DoctorViewPanel extends javax.swing.JFrame {
                             String observations = ObservationsHospitalizationInput.getText();
                             String entDate = HospitalizationDateInput.getText();
                             LocalDate entryDate = LocalDate.of(Integer.parseInt(entDate.substring(0, 4)), Integer.parseInt(entDate.substring(5, 7)), Integer.parseInt(entDate.substring(8)));
-                            this.hospitalizations.add(new Hospitalization("asdfasdf", (Patient)user, this.doctor, LocalDate.MAX, reason, RoomType.IMC, observations, HospitalizationStatus.ONGOING));
+                            DataStore.getInstance().getHospitalizations().add(new Hospitalization("asdfasdf", (Patient)user, this.doctor, LocalDate.MAX, reason, RoomType.IMC, observations, "ONGOING"));
                         }
                     }
                 }
@@ -1279,7 +1281,7 @@ public class DoctorViewPanel extends javax.swing.JFrame {
         int frecuency = Integer.parseInt(FrecuencyInput.getText());
         
         model.addRow(new Object[]{appointmentId, medicationName, DoseInput.getText(), administrationRoute, "" + tratementduration, aditionalIformation, "" + frecuency});
-        for(Appointment apo: this.appointments){
+        for(Appointment apo : DataStore.getInstance().getAppointments()){
             if (apo.getId().equals(appointmentId)){
                 apo.addPrescription(new Prescription(apo, medicationName, dose, administrationRoute, tratementduration, aditionalIformation, frecuency));
             }

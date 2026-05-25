@@ -13,6 +13,7 @@ import packagee.core.model.user.admin.Administrator;
  *
  * @author paaoo
  */
+
 public class AdminController {
     public Response registrarAdministrador(Administrator a) {
         String idStr = String.valueOf(a.getId());
