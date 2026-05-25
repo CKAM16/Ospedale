@@ -25,7 +25,12 @@ public class Doctor extends User {
         this.licenceNumber = licenceNumber;
         this.assignedOffice = assignedOffice;
     }
-
+    public String getLicenceNumber(){
+        return licenceNumber;
+    } 
+    public String getAssignedOffice(){
+        return assignedOffice;
+    }
     public ArrayList<Appointment> getAppointments() {
         return appointments;
     }
