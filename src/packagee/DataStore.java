@@ -17,5 +17,6 @@ public class DataStore {
     public static List<Appointment> citas = new ArrayList<>();
     public static List<Hospitalization> hospitalizaciones = new ArrayList<>();
     public static List<User> usuarios = new ArrayList<>();
+    public static ArrayList<Administrator> administradores = new ArrayList<>();
 }
 
