@@ -19,6 +19,13 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
+import packagee.core.UI.ViewsManager;
+import packagee.core.controllers.AdminController;
+import packagee.core.controllers.AppointmentController;
+import packagee.core.controllers.DoctorController;
+import packagee.core.controllers.HospitalizationController;
+import packagee.core.controllers.PatientController;
+import packagee.core.model.persistence.Storage;
 
 /**
  *
@@ -34,7 +41,16 @@ public class PatientViewPanel extends javax.swing.JFrame {
     private ArrayList<Appointment> appointments;
     private ArrayList<Hospitalization> hospitalizations;
 
-    public PatientViewPanel() {
+    private PatientController patientController;
+    private DoctorController doctorController;
+    private AppointmentController appointmentController;
+    private HospitalizationController hospitalizationController;
+    private AdminController adminController;
+    private ViewsManager viewManager;
+    
+    
+
+    public PatientViewPanel(PatientController patientController, DoctorController doctorController, AppointmentController appointmentController, HospitalizationController hospitalizationController, AdminController adminController) {
         initComponents();
         //this.user = user;
         //this.users = users;
@@ -46,6 +62,12 @@ public class PatientViewPanel extends javax.swing.JFrame {
         //} else {
          //   BackButton.setVisible(false);
         //}
+        this.patientController = patientController;
+        this.doctorController = doctorController;
+        this.adminController = adminController;
+        this.appointmentController = appointmentController;
+        this.hospitalizationController = hospitalizationController;
+        
         this.setBackground(new Color(0, 0, 0, 0));
         this.setLocationRelativeTo(null);
     }
@@ -799,44 +821,30 @@ public class PatientViewPanel extends javax.swing.JFrame {
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         String firstname = FirstNameInput.getText();
         String lastname = LastNameInput.getText();
-        boolean gender = (GenderButton.getSelectedIndex() == 0 ? null : (GenderButton.getSelectedIndex() == 1));
+  
+        String gender = String.valueOf(GenderButton.getSelectedIndex());
         String birth = BirthDateInput.getText();
         String address = AddressInput.getText();
-        long phone = Long.parseLong(PhoneInput.getText());
+        String phone = PhoneInput.getText();
         String email = EmailInput.getText();
-        String username = ModifYUserInput.getText();
+        String user = ModifYUserInput.getText();
         String password = ModifyPasswordInput.getText();
         String comPassword = ModifyConfirmPasswordInput.getText();
-        LocalDate birthdate = LocalDate.of(Integer.parseInt(birth.substring(0, 4)), Integer.parseInt(birth.substring(5, 7)), Integer.parseInt(birth.substring(8)));
+        
         if (comPassword.equals(password)) {
-            for (User user : this.users) {
-                if (user.getId() == this.user.getId() && user instanceof Patient) {
-                    Patient userTemp = (Patient) user;
-                    userTemp.setAddress(address);
-                    userTemp.setBirthdate(birthdate);
-                    userTemp.setEmail(email);
-                    userTemp.setFirstname(firstname);
-                    userTemp.setGender(gender);
-                    userTemp.setLastname(lastname);
-                    userTemp.setPassword(password);
-                    userTemp.setPhone(phone);
-                    userTemp.setUsername(username);
-                }
-            }
+            patientController.actualizarPaciente(email, patient);
         }
 
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        //MainMenu login = new MainMenu();
-        this.setVisible(false);
-       // login.setVisible(true);
+
+       viewManager.returnToMenu();
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
-        //AdminViewPanel admin = new AdminViewPanel();
-        this.setVisible(false);
-        //admin.setVisible(true);
+        
+        viewManager.goBackAdmin();
     }//GEN-LAST:event_BackButtonActionPerformed
 
     private void SpecialtyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SpecialtyButtonActionPerformed
@@ -896,18 +904,19 @@ public class PatientViewPanel extends javax.swing.JFrame {
 
     private void CreateHospitalizationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateHospitalizationButtonActionPerformed
         String hospitalizationReason = HospitalizationReasonInput.getText();
-        long idDoctor = Long.parseLong(HospitalizationDoctorButton.getItemAt(HospitalizationDoctorButton.getSelectedIndex()));
+        String idDoctor = HospitalizationDoctorButton.getItemAt(HospitalizationDoctorButton.getSelectedIndex());
         Doctor doc = null;
-        for(User use: this.users){
-            if (use.getId()  == idDoctor ){
+        for(User use: Storage.getInstance().getPersons()){
+            if (String.valueOf(use.getId())  == idDoctor ){
                 doc = (Doctor) use;
             }
         }
-        LocalDate stimateDate = LocalDate.of(Integer.parseInt(DateOfAdmissionInput.getText().substring(0, 4)),Integer.parseInt(DateOfAdmissionInput.getText().substring(5, 7)), Integer.parseInt(DateOfAdmissionInput.getText().substring(8)));
+        String estimateDate = DateOfAdmissionInput.getText().substring(0, 4) + "-" + DateOfAdmissionInput.getText().substring(5, 7) + "-" + DateOfAdmissionInput.getText().substring(8);
         
-        RoomType desireRoom = RoomType.valueOf(RoomTypeButton.getItemAt(RoomTypeButton.getSelectedIndex()).toUpperCase());
+        String desireRoom = RoomTypeButton.getItemAt(RoomTypeButton.getSelectedIndex()).toUpperCase();
         String observations = ObservationsInput.getText();
-        this.hospitalizations.add(new Hospitalization(observations, this.patient, doc, stimateDate, observations, desireRoom, observations));
+        
+        hospitalizationController.solicitarHospitalizacion(idDoctor, patient, doc, idDoctor, desireRoom, RoomType.IMC, observations);
     }//GEN-LAST:event_CreateHospitalizationButtonActionPerformed
 
     private void GenderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GenderButtonActionPerformed

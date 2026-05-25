@@ -8,7 +8,6 @@
             <file>file:/C:/Users/harry/OneDrive/Documentos/NetBeansProjects/Ospedale/src/packagee/core/controllers/util/Response.java</file>
             <file>file:/C:/Users/harry/OneDrive/Documentos/NetBeansProjects/Ospedale/src/packagee/core/controllers/AppointmentController.java</file>
             <file>file:/C:/Users/harry/OneDrive/Documentos/NetBeansProjects/Ospedale/src/packagee/core/controllers/AdminController.java</file>
-            <file>file:/C:/Users/harry/OneDrive/Documentos/NetBeansProjects/Ospedale/src/packagee/core/controllers/DoctorController.java</file>
             <file>file:/C:/Users/harry/OneDrive/Documentos/NetBeansProjects/Ospedale/src/packagee/core/controllers/HospitalizationController.java</file>
             <file>file:/C:/Users/harry/OneDrive/Documentos/NetBeansProjects/Ospedale/src/packagee/core/model/persistence/Storage.java</file>
             <file>file:/C:/Users/harry/OneDrive/Documentos/NetBeansProjects/Ospedale/src/packagee/core/UI/ViewsManager.java</file>
@@ -29,14 +28,23 @@
             <file>file:/C:/Users/harry/OneDrive/Documentos/NetBeansProjects/Ospedale/src/packagee/core/model/appointment/Pending.java</file>
             <file>file:/C:/Users/harry/OneDrive/Documentos/NetBeansProjects/Ospedale/src/packagee/core/model/appointment/Request.java</file>
             <file>file:/C:/Users/harry/OneDrive/Documentos/NetBeansProjects/Ospedale/src/packagee/core/controllers/PatientController.java</file>
-            <file>file:/C:/Users/harry/OneDrive/Documentos/NetBeansProjects/Ospedale/src/packagee/User.java</file>
             <file>file:/C:/Users/harry/OneDrive/Documentos/NetBeansProjects/Ospedale/src/packagee/core/model/user/patient/Patient.java</file>
             <file>file:/C:/Users/harry/OneDrive/Documentos/NetBeansProjects/Ospedale/src/packagee/core/model/persistence/Observer/Observable.java</file>
             <file>file:/C:/Users/harry/OneDrive/Documentos/NetBeansProjects/Ospedale/src/packagee/core/model/persistence/ModifyInterface.java</file>
-            <file>file:/C:/Users/harry/OneDrive/Documentos/NetBeansProjects/Ospedale/src/packagee/core/model/persistence/UserChanger.java</file>
             <file>file:/C:/Users/harry/OneDrive/Documentos/NetBeansProjects/Ospedale/src/packagee/core/model/persistence/Observer/Observer.java</file>
             <file>file:/C:/Users/harry/OneDrive/Documentos/NetBeansProjects/Ospedale/src/packagee/core/model/user/User.java</file>
             <file>file:/C:/Users/harry/OneDrive/Documentos/NetBeansProjects/Ospedale/src/packagee/core/model/persistence/JSONSave.java</file>
+            <file>file:/C:/Users/harry/OneDrive/Documentos/NetBeansProjects/Ospedale/src/packagee/core/model/persistence/serialize/DoctorSerializable.java</file>
+            <file>file:/C:/Users/harry/OneDrive/Documentos/NetBeansProjects/Ospedale/src/packagee/core/model/persistence/serialize/Serializable.java</file>
+            <file>file:/C:/Users/harry/OneDrive/Documentos/NetBeansProjects/Ospedale/src/packagee/core/model/user/doctor/Doctor.java</file>
+            <file>file:/C:/Users/harry/OneDrive/Documentos/NetBeansProjects/Ospedale/src/packagee/core/model/persistence/deserialize/AdminDeserialize.java</file>
+            <file>file:/C:/Users/harry/OneDrive/Documentos/NetBeansProjects/Ospedale/src/packagee/core/model/persistence/deserialize/DoctorDeserialize.java</file>
+            <file>file:/C:/Users/harry/OneDrive/Documentos/NetBeansProjects/Ospedale/src/packagee/core/model/persistence/deserialize/Deserializable.java</file>
+            <file>file:/C:/Users/harry/OneDrive/Documentos/NetBeansProjects/Ospedale/src/packagee/core/model/persistence/deserialize/PatientDeserialize.java</file>
+            <file>file:/C:/Users/harry/OneDrive/Documentos/NetBeansProjects/Ospedale/src/packagee/core/controllers/DoctorController.java</file>
+            <file>file:/C:/Users/harry/OneDrive/Documentos/NetBeansProjects/Ospedale/src/packagee/core/model/hospitalization/Hospitalization.java</file>
+            <file>file:/C:/Users/harry/OneDrive/Documentos/NetBeansProjects/Ospedale/src/packagee/core/model/prescription/Prescription.java</file>
+            <file>file:/C:/Users/harry/OneDrive/Documentos/NetBeansProjects/Ospedale/src/packagee/core/model/persistence/DataStore.java</file>
         </group>
     </open-files>
 </project-private>

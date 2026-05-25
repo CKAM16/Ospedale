@@ -1165,24 +1165,19 @@ public class DoctorViewPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_SaveDoctorChangesButtonActionPerformed
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
-        MainMenu login = new MainMenu();
-        this.setVisible(false);
-        login.setVisible(true);
+
+        viewManager.returnToMenu();
     }//GEN-LAST:event_jButton12ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-        AdminViewPanel admin = new AdminViewPanel();
-        this.setVisible(false);
-        admin.setVisible(true);
+
+        viewManager.returnToMenu();
+
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void CancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelButtonActionPerformed
         if (RequestedHospitalizationsButton.isSelected()) {
-            for(Hospitalization hosp : this.hospitalizations){
-                if (SelectRequestedHospitalizationButton.getItemAt(SelectRequestedHospitalizationButton.getSelectedIndex()) == hosp.getId()) {
-                    hosp.setStatus(HospitalizationStatus.CANCELED);
-                }
-            }
+            hospitalizationsController.cancelarHospitalizacion(SelectRequestedHospitalizationButton.getItemAt(SelectRequestedHospitalizationButton.getSelectedIndex());
         }
     }//GEN-LAST:event_CancelButtonActionPerformed
 

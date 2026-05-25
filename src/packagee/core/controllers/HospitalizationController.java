@@ -6,7 +6,11 @@ package packagee.core.controllers;
 
 import java.time.LocalDate;
 import packagee.core.controllers.util.Response;
+import packagee.core.model.hospitalization.CANCELED;
 import packagee.core.model.hospitalization.Hospitalization;
+import packagee.core.model.hospitalization.HospitalizationHandler;
+import packagee.core.model.hospitalization.ONGOING;
+import packagee.core.model.persistence.DataStore;
 import packagee.core.model.room.RoomType;
 import packagee.core.model.user.doctor.Doctor;
 import packagee.core.model.user.patient.Patient;
@@ -32,18 +36,19 @@ public class HospitalizationController {
         }
 
         Hospitalization hosp = new Hospitalization(id, paciente, doctor, fechaValida, reason, roomType, observations);
-        DataStore.hospitalizaciones.add(hosp);
+        DataStore.getInstance().getHospitalizations().add(hosp);
 
         return new Response("SUCCESS", "Hospitalización solicitada correctamente");
     }
 
     public Response aprobarHospitalizacion(String idHosp) {
-        for (Hospitalization h : DataStore.hospitalizaciones) {
+        for (Hospitalization h : DataStore.getInstance().getHospitalizations()){
             if (h.getId().equals(idHosp)) {
-                if (h.getStatus() != HospitalizationStatus.REQUESTED) {
-                    return new Response("ERROR", "Solo se pueden aprobar hospitalizaciones en estado REQUESTED");
+                if (h.getStatus() != "REQUESTED") {
+                    return new Response("ERROR", "Solo se pueden aprobar getHospitalizations() en estado REQUESTED");
                 }
-                h.setStatus(HospitalizationStatus.ONGOING);
+                HospitalizationHandler handler = new HospitalizationHandler(h);
+                handler.changeStatus(new ONGOING());
                 return new Response("SUCCESS", "Hospitalización aprobada y marcada como ONGOING");
             }
         }
@@ -51,12 +56,13 @@ public class HospitalizationController {
     }
 
     public Response cancelarHospitalizacion(String idHosp) {
-        for (Hospitalization h : DataStore.hospitalizaciones) {
+        for (Hospitalization h : DataStore.getInstance().getHospitalizations()) {
             if (h.getId().equals(idHosp)) {
-                if (h.getStatus() == HospitalizationStatus.ONGOING) {
+                if (h.getStatus() == "ONGOING") {
                     return new Response("ERROR", "No se puede cancelar una hospitalización en curso");
                 }
-                h.setStatus(HospitalizationStatus.CANCELED);
+                HospitalizationHandler handler = new HospitalizationHandler(h);
+                handler.changeStatus(new CANCELED());
                 return new Response("SUCCESS", "Hospitalización cancelada correctamente");
             }
         }
@@ -64,6 +70,6 @@ public class HospitalizationController {
     }
 
     public Response obtenerHospitalizaciones() {
-        return new Response("SUCCESS", "Lista de hospitalizaciones obtenida: " + DataStore.hospitalizaciones.size());
+        return new Response("SUCCESS", "Lista de getHospitalizations() obtenida: " + DataStore.getInstance().getHospitalizations().size());
     }
 }

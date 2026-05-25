@@ -453,16 +453,12 @@ public class AdminViewPanel extends javax.swing.JFrame {
             if(String.valueOf(use.getId()) == idDoctor)
                 temp =(Doctor) user;
         }
-        DoctorViewPanel doctor = new DoctorViewPanel();
-        this.setVisible(false);
-        doctor.setVisible(true);
+        viewManager.goToDoctorView();
     }//GEN-LAST:event_ViewDoctorButtonActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        
-        //MainMenu a = new MainMenu();
-        this.setVisible(false);
-       // a.setVisible(true);
+
+       viewManager.returnToMenu();
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void PatientViewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PatientViewButtonActionPerformed
@@ -472,9 +468,7 @@ public class AdminViewPanel extends javax.swing.JFrame {
             if(use.getId() == idPatient)
                 temp =(Patient) user;
         }
-        PatientViewPanel patient = new PatientViewPanel();
-        this.setVisible(false);
-        patient.setVisible(true);
+        viewManager.goToPatientView();
     }//GEN-LAST:event_PatientViewButtonActionPerformed
 
 

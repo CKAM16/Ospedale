@@ -17,6 +17,34 @@ public class Hospitalization {
     
     private final String id;
     private Patient patient;
+
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public Doctor getDoctor() {
+        return doctor;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public String getReason() {
+        return reason;
+    }
+
+    public RoomType getRoomType() {
+        return roomType;
+    }
+
+    public String getObservations() {
+        return observations;
+    }
+
+    public String getStatus() {
+        return status;
+    }
     private Doctor doctor;
     private LocalDate date;
 

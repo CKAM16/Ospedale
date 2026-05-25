@@ -40,28 +40,28 @@ public class ViewsManager {
     
     public void goToDoctorView(){
         
-        this.MainMenu.setVisible(false);;
-        this.DoctorView.setVisible(true);;
-        this.PatientView.setVisible(false);;
-        this.AdminView.setVisible(false);;
+        this.MainMenu.setVisible(false);
+        this.DoctorView.setVisible(true);
+        this.PatientView.setVisible(false);
+        this.AdminView.setVisible(false);
         
     }
     
     public void goToAdminView(){
         
-        this.MainMenu.setVisible(false);;
-        this.DoctorView.setVisible(false);;
-        this.PatientView.setVisible(false);;
-        this.AdminView.setVisible(true);;
+        this.MainMenu.setVisible(false);
+        this.DoctorView.setVisible(false);
+        this.PatientView.setVisible(false);
+        this.AdminView.setVisible(true);
         
     }
     
     public void goToPatientView(){
         
-        this.MainMenu.setVisible(false);;
-        this.DoctorView.setVisible(false);;
-        this.PatientView.setVisible(true);;
-        this.AdminView.setVisible(false);;
+        this.MainMenu.setVisible(false);
+        this.DoctorView.setVisible(false);
+        this.PatientView.setVisible(true);
+        this.AdminView.setVisible(false);
         
     }
     public void navigateAfterLogin(User user) {
@@ -73,7 +73,20 @@ public class ViewsManager {
         } else if (user instanceof Administrator) {
             goToAdminView();
         }
+    }
+    public void goBackAdmin(){
         
+        this.MainMenu.setVisible(false);
+        this.DoctorView.setVisible(false);
+        this.PatientView.setVisible(false);
+        this.AdminView.setVisible(true);
+    }
+    public void returnToMenu(){
+        
+        this.MainMenu.setVisible(true);
+        this.DoctorView.setVisible(false);
+        this.PatientView.setVisible(false);
+        this.AdminView.setVisible(false);
     }
     
    

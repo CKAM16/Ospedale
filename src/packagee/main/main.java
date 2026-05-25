@@ -32,6 +32,11 @@ public class main {
         
         LoginController login = new LoginController();
         PatientController patient = new PatientController( jsonsave);
+        DoctorController doctor = new DoctorController();
+        AdminController admin = new AdminController();
+        HospitalizationController hosp = new HospitalizationController();
+        AppointmentController appoint = new AppointmentController();
+        
         
         System.setProperty("flatlaf.useNativeLibrary", "false");
 
@@ -44,13 +49,17 @@ public class main {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 
-                DoctorViewPanel doctorView = new DoctorViewPanel();
-                PatientViewPanel patientView = new PatientViewPanel();
-                AdminViewPanel adminView = new AdminViewPanel();
+                DoctorViewPanel doctorView = new DoctorViewPanel(patient, doctor, appoint, hosp, admin);
+                PatientViewPanel patientView = new PatientViewPanel(patient, doctor, appoint, hosp, admin);
+                AdminViewPanel adminView = new AdminViewPanel(patient, doctor, appoint, hosp, admin);
                 MainMenu mainMenu = new MainMenu(patient, login);
 
                 ViewsManager UI = new ViewsManager(doctorView, patientView, adminView, mainMenu);
+                
                 mainMenu.setViewManager(UI);
+                patientView.setViewManager(UI);
+                doctorView.setViewManager(UI);
+                adminView.setViewManager(UI);
                 
                 UI.start();
             };
