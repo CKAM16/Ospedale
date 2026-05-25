@@ -71,33 +71,32 @@ public class PatientController extends Observable {
         return new Response("SUCCESS", "Paciente registrado correctamente");
     }
 
-    public Response actualizarPaciente(String id, Patient nuevosDatos) {
+    public Response actualizarPaciente(String id,String firstname, String lastname,String gender, String birthdate,String address, String phone ,String email, String user,String password, String comPassword) {
         for (User p : Storage.getInstance().getPersons()) {
             if ( p instanceof Patient){
                 if (p.getId() == Long.parseLong(id)) {
                     
-                    String telefono = String.valueOf(nuevosDatos.getPhone());
+                    String telefono = String.valueOf(phone);
                     if (telefono.length() != 10 || !telefono.matches("\\d+")) {
                         return new Response("ERROR", "Teléfono debe tener exactamente 10 dígitos");
                     }
-                    if (!nuevosDatos.getEmail().matches("^[A-Za-z0-9+_.-]+@(.+)$")) {
+                    if (!email.matches("^[A-Za-z0-9+_.-]+@(.+)$")) {
                         return new Response("ERROR", "Email inválido");
                     }
-                    if (!nuevosDatos.getDate().toString().matches("^\\d{4}-\\d{2}-\\d{2}$")) {
+                    if (!birthdate.matches("^\\d{4}-\\d{2}-\\d{2}$")) {
                         return new Response("ERROR", "Fecha de nacimiento inválida");
                     }
                     
-                    p.setFirstname(nuevosDatos.getFirstname());
-                    p.setLastname(nuevosDatos.getLastname());
-                    p.setEmail(nuevosDatos.getEmail());
-                    p.setPhone(nuevosDatos.getPhone());
-                    p.setAddress(nuevosDatos.getAddress());
-                    p.setBirthdate(nuevosDatos.getDate());
-                    p.setGender(nuevosDatos.getGender());
-                    p.setUsername(nuevosDatos.getUsername());
-                    p.setPassword(nuevosDatos.getPassword());
-                    
-                    System.out.println("ESOOO");
+                    p.setFirstname(firstname);
+                    p.setLastname(lastname);
+                    p.setEmail(email);
+                    p.setPhone(Long.parseLong(phone));
+                    p.setAddress(address);
+                    p.setBirthdate(LocalDate.parse(birthdate);
+                    p.setGender(Boolean.parseBoolean(gender));
+                    p.setUsername(user);
+                    p.setPassword(password);
+
                     return new Response("SUCCESS", "Paciente actualizado correctamente");
                 }
             }
