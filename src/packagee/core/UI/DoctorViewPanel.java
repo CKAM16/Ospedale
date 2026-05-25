@@ -24,6 +24,8 @@ import packagee.core.controllers.AppointmentController;
 import packagee.core.controllers.DoctorController;
 import packagee.core.controllers.HospitalizationController;
 import packagee.core.controllers.PatientController;
+import packagee.core.controllers.util.Response;
+import packagee.core.model.appointment.AppointmentHandler;
 
 /**
  *
@@ -1196,7 +1198,7 @@ public class DoctorViewPanel extends javax.swing.JFrame {
 
     private void CancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelButtonActionPerformed
         if (RequestedHospitalizationsButton.isSelected()) {
-            hospitalizationsController.cancelarHospitalizacion(SelectRequestedHospitalizationButton.getItemAt(SelectRequestedHospitalizationButton.getSelectedIndex());
+            hospitalizationController.cancelarHospitalizacion(SelectRequestedHospitalizationButton.getItemAt(SelectRequestedHospitalizationButton.getSelectedIndex()));
         }
     }//GEN-LAST:event_CancelButtonActionPerformed
 
@@ -1230,7 +1232,7 @@ public class DoctorViewPanel extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) DoctorsPatientsView.getModel();
         model.setRowCount(0);
         for (Appointment a : p.getAppointments()) {
-            model.addRow(new Object[]{a.getId(), a.getDatetime().toString(), a.getDoctor().getFirstname() + " " + a.getDoctor().getLastname(), a.getSpecialty().name(), a.isType() ? "In-person" : "Remote", a.getStatus().name()});
+            model.addRow(new Object[]{a.getId(), a.getDatetime().toString(), a.getDoctor().getFirstname() + " " + a.getDoctor().getLastname(), a.getSpecialty().name(), a.isType() ? "In-person" : "Remote", a.getStatus()});
         }
     }//GEN-LAST:event_jButton8ActionPerformed
 
@@ -1241,17 +1243,13 @@ public class DoctorViewPanel extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) DoctorAppointmentsView.getModel();
         model.setRowCount(0);
         for (Appointment a : d.getAppointments()) {
-            model.addRow(new Object[]{a.getId(), a.getDatetime().toString(), a.getPatient().getFirstname() + " " + a.getDoctor().getLastname(), a.getSpecialty().name(), a.isType() ? "In-person" : "Remote", a.getStatus().name()});
+            model.addRow(new Object[]{a.getId(), a.getDatetime().toString(), a.getPatient().getFirstname() + " " + a.getDoctor().getLastname(), a.getSpecialty().name(), a.isType() ? "In-person" : "Remote", a.getStatus()});
         }
     }//GEN-LAST:event_TotalAppointmentsButtonActionPerformed
 
     private void AcceptAppointmentsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AcceptAppointmentsButtonActionPerformed
         String idAppointment = SelectAcceptAppointmentsButton.getItemAt(SelectAcceptAppointmentsButton.getSelectedIndex());
-        for(Appointment apo: this.appointments){
-            if(apo.getId() == idAppointment){
-                apo.setStatus(AppointmentStatus.PENDING);
-            }
-        }
+        appointmentController.aprobarCita(idAppointment);
     }//GEN-LAST:event_AcceptAppointmentsButtonActionPerformed
 
     private void CompleteAppointmentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CompleteAppointmentButtonActionPerformed
@@ -1260,15 +1258,7 @@ public class DoctorViewPanel extends javax.swing.JFrame {
         String observations = ObservationsInput.getText();
         String recommendedTrea = jTextArea7.getText();
         String followUp = FollowUpInput.getText();
-        for(Appointment apo: this.appointments){
-            if(apo.getId() == idAppointment){
-                apo.setStatus(AppointmentStatus.CANCELED);
-                apo.setDiagnosis(diagnosis);
-                apo.setFollowUp(followUp);
-                apo.setRecommendedTreatment(recommendedTrea);
-                apo.setObservations(observations);
-            }
-        }
+        appointmentController.completarCita(idAppointment, diagnosis, observations, recommendedTrea, followUp);
     }//GEN-LAST:event_CompleteAppointmentButtonActionPerformed
 
     private void PrescribeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrescribeButtonActionPerformed
