@@ -58,10 +58,12 @@ public class DoctorViewPanel extends javax.swing.JFrame {
        // this.doctor = doc;
        // this.hospitalizations = hospitalizations;
        // this.appointments = appointments;
-       // if (user instanceof Administrator)
-           // jButton11.setVisible(true);
-       // else    
-          //  jButton11.setVisible(false);
+       if (user instanceof Administrator){
+             jButton11.setVisible(true);
+       }
+       else{    
+            jButton11.setVisible(false);
+       }
           
         this.patientController = patientController;
         this.doctorController = doctorController;
@@ -1162,29 +1164,14 @@ public class DoctorViewPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_PendingAppointmentsButtonActionPerformed
 
     private void SaveDoctorChangesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveDoctorChangesButtonActionPerformed
-        String firstname = ModifyDoctorFirstNameInput.getText();
-        String lastname = ModifyDoctorLastNameInput.getText();
-        String spec = ModifYSpecialtyDoctorButton.getItemAt(ModifYSpecialtyDoctorButton.getSelectedIndex());
-        String licenseNumber = ModifyLicenseNumberDoctorInput.getText();
-        String assignedOffice = ModifyAssignedOfficeDoctorInput.getText();
-        String username = DoctorUserInput.getText();
-        String password = DoctorPasswordInput.getText();
-        String comPassword = DoctorPasswordConfirmation.getText();
-        Specialty specialty = Specialty.valueOf(spec.replaceAll(" &", "").replaceAll(" ", "_"));
-        if (password.equals(comPassword)) {
-            for(User doc: Storage.getInstance().getPersons()){
-                if (doctor.getId() == doc.getId()) {
-                    doctor.setFirstname(firstname);
-                    doctor.setLastname(lastname);
-                    doctor.setPassword(password);
-                    doctor.setUsername(username);
-                    doctor.setAssignedOffice(assignedOffice);
-                    doctor.setLicenceNumber(licenseNumber);
-                    doctor.setSpecialty(specialty);
-                    
-                }
-            }
+        String pass = DoctorPasswordInput.getText();
+        String confirm = DoctorPasswordConfirmation.getText();
+
+        if (!pass.equals(confirm)) {
+            return;
         }
+        
+        Response r = doctorController.actualizarDoctor(String.valueOf(this.doctor.getId()),DoctorUserInput.getText(),ModifyDoctorFirstNameInput.getText(),ModifyDoctorLastNameInput.getText(), pass, (String) ModifYSpecialtyDoctorButton.getSelectedItem(), ModifyLicenseNumberDoctorInput.getText(), ModifyAssignedOfficeDoctorInput.getText());
     }//GEN-LAST:event_SaveDoctorChangesButtonActionPerformed
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
@@ -1197,7 +1184,39 @@ public class DoctorViewPanel extends javax.swing.JFrame {
         viewManager.returnToMenu();
 
     }//GEN-LAST:event_jButton11ActionPerformed
+    private void ComboBoxes() {
+        SelectAcceptAppointmentsButton.removeAllItems();
+        SelectCompleteAppointmentButton.removeAllItems();
+        SelectRescheduleAppointmentButton.removeAllItems();
+        SelectAppointmentIDButton.removeAllItems();
+        SelectPatientButton.removeAllItems();
+        SelectPatientHospitalizationButton.removeAllItems();
 
+       if (doctor == null) return;
+        
+        
+        SelectAcceptAppointmentsButton.addItem("Select One");
+        SelectCompleteAppointmentButton.addItem("Select One");
+        SelectRescheduleAppointmentButton.addItem("Select One");
+        SelectAppointmentIDButton.addItem("Select One");
+        SelectPatientButton.addItem("Select One");
+        SelectPatientHospitalizationButton.addItem("Select One");
+        
+        for (Appointment a : doctor.getAppointments()) {
+            SelectAcceptAppointmentsButton.addItem(a.getId());
+            SelectCompleteAppointmentButton.addItem(a.getId());
+            SelectRescheduleAppointmentButton.addItem(a.getId());
+            SelectAppointmentIDButton.addItem(a.getId());
+        }
+
+        for (User u : Storage.getInstance().getPersons()) {
+            if (u instanceof Patient) {
+                String item = u.getFirstname() + " " + u.getLastname() + " (ID:" + u.getId() + ")";
+                SelectPatientButton.addItem(item);
+                SelectPatientHospitalizationButton.addItem(item);
+            }
+        }
+    }
     private void CancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelButtonActionPerformed
         if (RequestedHospitalizationsButton.isSelected()) {
             hospitalizationController.cancelarHospitalizacion(SelectRequestedHospitalizationButton.getItemAt(SelectRequestedHospitalizationButton.getSelectedIndex()));
@@ -1205,27 +1224,28 @@ public class DoctorViewPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_CancelButtonActionPerformed
 
     private void GenerateHospitalizationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GenerateHospitalizationButtonActionPerformed
-        if (PatientIDButton.isSelected()) {
-            for(User user: this.users){
-                if (user instanceof Patient) {
-                    if (SelectPatientHospitalizationButton.getItemAt(SelectPatientHospitalizationButton.getSelectedIndex()).equals(user.getId())) {
-                        if (this.user instanceof Administrator) {
-                            String reason = ReasonHospitalizationInput.getText();
-                            String observations = ObservationsHospitalizationInput.getText();
-                            String entDate = HospitalizationDateInput.getText();
-                            LocalDate entryDate = LocalDate.of(Integer.parseInt(entDate.substring(0, 4)), Integer.parseInt(entDate.substring(5, 7)), Integer.parseInt(entDate.substring(8)));
-                            DataStore.getInstance().getHospitalizations().add(new Hospitalization("asdfasdf", (Patient)user, this.doctor, LocalDate.MAX, reason, RoomType.IMC, observations, "ONGOING"));
-                        }
-                    }
-                }
+        String patientInfo = (String) SelectPatientHospitalizationButton.getSelectedItem();
+        
+        if (patientInfo == null || patientInfo.equals("Select one")) return;
+
+        Patient patientObj = null;
+        for (User u : Storage.getInstance().getPersons()) {
+            String fullname = u.getFirstname()+" "+u.getLastname();
+            if (fullname.equals(patientInfo)) {
+                patientObj = (Patient) u;
+                break;
             }
         }
+        
+        this.ComboBoxes();
+        Response r = hospitalizationController.solicitarHospitalizacion( "H-" + patientObj.getHospitalizations(), patientObj, this.doctor, HospitalizationDateInput.getText(), ReasonHospitalizationInput.getText(), RoomType.STANDARD, ObservationsHospitalizationInput.getText());
     }//GEN-LAST:event_GenerateHospitalizationButtonActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
+        this.ComboBoxes();
         Patient p = null;
-        for (User u : this.users) {
+        for (User u : Storage.getInstance().getPersons()) {
             if (u.getId() == Long.parseLong(SelectPatientButton.getItemAt(SelectPatientButton.getSelectedIndex()))) {
                 p = (Patient) u;
             }
@@ -1236,6 +1256,7 @@ public class DoctorViewPanel extends javax.swing.JFrame {
         for (Appointment a : p.getAppointments()) {
             model.addRow(new Object[]{a.getId(), a.getDatetime().toString(), a.getDoctor().getFirstname() + " " + a.getDoctor().getLastname(), a.getSpecialty().name(), a.isType() ? "In-person" : "Remote", a.getStatus()});
         }
+        
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void TotalAppointmentsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TotalAppointmentsButtonActionPerformed
@@ -1251,7 +1272,8 @@ public class DoctorViewPanel extends javax.swing.JFrame {
 
     private void AcceptAppointmentsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AcceptAppointmentsButtonActionPerformed
         String idAppointment = SelectAcceptAppointmentsButton.getItemAt(SelectAcceptAppointmentsButton.getSelectedIndex());
-        appointmentController.aprobarCita(idAppointment);
+        Response r = appointmentController.aprobarCita(idAppointment);
+        this.ComboBoxes();;
     }//GEN-LAST:event_AcceptAppointmentsButtonActionPerformed
 
     private void CompleteAppointmentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CompleteAppointmentButtonActionPerformed
@@ -1260,7 +1282,9 @@ public class DoctorViewPanel extends javax.swing.JFrame {
         String observations = ObservationsInput.getText();
         String recommendedTrea = jTextArea7.getText();
         String followUp = FollowUpInput.getText();
-        appointmentController.completarCita(idAppointment, diagnosis, observations, recommendedTrea, followUp);
+        
+        Response r = appointmentController.completarCita(idAppointment, diagnosis, observations, recommendedTrea, followUp);
+        this.ComboBoxes();;
     }//GEN-LAST:event_CompleteAppointmentButtonActionPerformed
 
     private void PrescribeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrescribeButtonActionPerformed
@@ -1411,7 +1435,11 @@ public class DoctorViewPanel extends javax.swing.JFrame {
     private packagee.core.UI.PanelRound panelRound2;
     // End of variables declaration//GEN-END:variables
 
-     public void setViewManager(ViewsManager UI) {
+    public void setViewManager(ViewsManager UI) {
        this.viewManager = UI;
+    }
+
+    public void setDoctor(Doctor doctor) {
+       this.doctor = doctor;
     }
 }

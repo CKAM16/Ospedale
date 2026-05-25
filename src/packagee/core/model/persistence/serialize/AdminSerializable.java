@@ -24,7 +24,7 @@ public class AdminSerializable implements Serializable{
     public HashMap<String, Object> serialize() {
         HashMap<String, Object> serializedData = new HashMap<>();
         
-        serializedData.put("type", this.admin.getClass().toString());
+        serializedData.put("type", "admin");
         serializedData.put("id", this.admin.getId());
         serializedData.put("username", this.admin.getUsername());
         serializedData.put("firstname", this.admin.getFirstname());

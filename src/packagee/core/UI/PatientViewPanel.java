@@ -26,6 +26,7 @@ import packagee.core.controllers.DoctorController;
 import packagee.core.controllers.HospitalizationController;
 import packagee.core.controllers.PatientController;
 import packagee.core.controllers.util.Response;
+import packagee.core.model.persistence.DataStore;
 import packagee.core.model.persistence.Storage;
 
 /**
@@ -58,11 +59,12 @@ public class PatientViewPanel extends javax.swing.JFrame {
         //this.patient = patient;
         //this.hospitalizations = hospitalizations;
         //this.appointments = appointments;
-        //if (user instanceof Administrator) {
-          //  BackButton.setVisible(true);
-        //} else {
-         //   BackButton.setVisible(false);
-        //}
+        if (user instanceof Administrator) {
+            BackButton.setVisible(true);
+        }
+        else {
+           BackButton.setVisible(false);
+        }
         this.patientController = patientController;
         this.doctorController = doctorController;
         this.adminController = adminController;
@@ -71,6 +73,12 @@ public class PatientViewPanel extends javax.swing.JFrame {
         
         this.setBackground(new Color(0, 0, 0, 0));
         this.setLocationRelativeTo(null);
+        
+        this.HospitalComboBoxes();
+    }
+    public void setPatient(Patient p){
+        this.patient = p;
+        this.user = p;
     }
 
     /**
@@ -523,6 +531,11 @@ public class PatientViewPanel extends javax.swing.JFrame {
 
         HospitalizationDoctorButton.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
         HospitalizationDoctorButton.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select one" }));
+        HospitalizationDoctorButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HospitalizationDoctorButtonActionPerformed(evt);
+            }
+        });
 
         DateOfAdmissionInput.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
 
@@ -824,8 +837,8 @@ public class PatientViewPanel extends javax.swing.JFrame {
             javax.swing.JOptionPane.showMessageDialog(this, "Passwords do not match.");
             return;
         }
+        
         Response r = patientController.actualizarPaciente(String.valueOf(patient.getId()),FirstNameInput.getText(),LastNameInput.getText(),String.valueOf(GenderButton.getSelectedIndex()),BirthDateInput.getText(),AddressInput.getText(),PhoneInput.getText(), EmailInput.getText(), ModifYUserInput.getText(), password, comPassword);
-        javax.swing.JOptionPane.showMessageDialog(this, r.getMessage());
 
     }//GEN-LAST:event_jButton9ActionPerformed
 
@@ -859,7 +872,7 @@ public class PatientViewPanel extends javax.swing.JFrame {
         SelectDoctor.removeAllItems();
 
         SelectDoctor.addItem("Select one");
-        for (User doc : this.users) {
+        for (User doc : Storage.getInstance().getPersons()) {
             if (doc instanceof Doctor) {
                 SelectDoctor.addItem(doc.getFirstname() + " " + doc.getLastname());
             }
@@ -868,23 +881,55 @@ public class PatientViewPanel extends javax.swing.JFrame {
 
     private void CreateAppointmentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateAppointmentButtonActionPerformed
 
-        String appointDate = AppointmentDateInput.getText();
-        LocalDate appointmentDate = LocalDate.of(Integer.parseInt(appointDate.substring(0, 4)), Integer.parseInt(appointDate.substring(5, 7)), Integer.parseInt(appointDate.substring(8)));
-        LocalTime appointmentHour = LocalTime.of(Integer.parseInt(AppointmentTimeInput.getText().substring(0, 2)), Integer.parseInt(AppointmentTimeInput.getText().substring(3)));
-        LocalDateTime Finally = LocalDateTime.of(appointmentDate, appointmentHour);
+        String datePart = AppointmentDateInput.getText();
+        String timePart = AppointmentTimeInput.getText();
         String appointmentReason = AppointmentReasonInput.getText();
-        long docId = Long.parseLong(SelectDoctor.getItemAt(SelectDoctor.getSelectedIndex()));
-        Doctor doctor = null;
-        for(User use:this.users){
-            if (use.getId() == docId) {
-                doctor = (Doctor) use;
+        
+        String date = datePart+"T"+timePart;
+
+        String selectedItem = (String) SelectDoctor.getSelectedItem();
+        
+        Doctor selectedDoctor = null;
+        for (User u : Storage.getInstance().getPersons()) {
+            if (u instanceof Doctor) {
+                String fullName = u.getFirstname() + " " + u.getLastname();
+                if (fullName.equals(selectedItem)) {
+                    selectedDoctor = (Doctor) u;
+                    break;
+                }
             }
         }
-        boolean appointmentType = (AppointmentTypeButton.getSelectedIndex() == 0 ? null : (AppointmentTypeButton.getSelectedIndex() == 2 ));
-        this.appointments.add(new Appointment(appointDate, patient, doctor, doctor.getSpecialty(), Finally, appointDate, appointmentType));
+
+        boolean type = (AppointmentTypeButton.getSelectedIndex() == 2);
+
+        String newId = "A-" + DataStore.getInstance().getAppointments().size();
+
+        Response response = appointmentController.solicitarCita(newId, this.patient, selectedDoctor, selectedDoctor.getSpecialty(), date, appointmentReason, type);
+        for (Appointment u : patient.getAppointments()) {
+                IDAppointmentButton.addItem(u.getId());
+        }
+        if (response.getStatus().equals("SUCCESS")) {
+            jButton6ActionPerformed(null);
+        }
     }//GEN-LAST:event_CreateAppointmentButtonActionPerformed
 
-
+    private void HospitalComboBoxes() {
+        
+        HospitalizationDoctorButton.removeAllItems();
+        
+        HospitalizationDoctorButton.addItem("Select one");
+        for (User doc : Storage.getInstance().getPersons()) {
+            if (doc instanceof Doctor) {
+                HospitalizationDoctorButton.addItem(doc.getFirstname() + " " + doc.getLastname());
+            }
+        }
+        
+        RoomTypeButton.removeAllItems();
+        RoomTypeButton.addItem("Select one");
+        for (RoomType r : RoomType.values()) {
+            RoomTypeButton.addItem(r.name());
+        }
+    }
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
         Patient p = (Patient) user;
@@ -897,25 +942,42 @@ public class PatientViewPanel extends javax.swing.JFrame {
 
     private void CreateHospitalizationButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                            
 //GEN-FIRST:event_CreateHospitalizationButtonActionPerformed
-        String hospitalizationReason = HospitalizationReasonInput.getText();
-        String idDoctor = HospitalizationDoctorButton.getItemAt(HospitalizationDoctorButton.getSelectedIndex());
-        Doctor doc = null;
-        for(User use: Storage.getInstance().getPersons()){
-            if (String.valueOf(use.getId())  == idDoctor ){
-                doc = (Doctor) use;
+        String selectedDocInfo = (String) HospitalizationDoctorButton.getSelectedItem();
+        if (selectedDocInfo == null || selectedDocInfo.equals("Select one")) {
+            return;
+        }
+        
+        String selectedItem = (String) HospitalizationDoctorButton.getSelectedItem();
+        
+        Doctor selectedDoctor = null;
+        for (User u : Storage.getInstance().getPersons()) {
+            if (u instanceof Doctor) {
+                String fullName = u.getFirstname() + " " + u.getLastname();
+                if (fullName.equals(selectedItem)) {
+                    selectedDoctor = (Doctor) u;
+                    break;
+                }
             }
         }
-        String estimateDate = DateOfAdmissionInput.getText().substring(0, 4) + "-" + DateOfAdmissionInput.getText().substring(5, 7) + "-" + DateOfAdmissionInput.getText().substring(8);
-        
-        String desireRoom = RoomTypeButton.getItemAt(RoomTypeButton.getSelectedIndex()).toUpperCase();
+
+        String reason = HospitalizationReasonInput.getText();
+        String dateStr = DateOfAdmissionInput.getText(); // Should be YYYY-MM-DD
+        RoomType selectedRoom = RoomType.valueOf((String) RoomTypeButton.getSelectedItem());
         String observations = ObservationsInput.getText();
-        
-        hospitalizationController.solicitarHospitalizacion(idDoctor, patient, doc, idDoctor, desireRoom, RoomType.IMC, observations);
+
+        String hospId = "H-" + DataStore.getInstance().getHospitalizations();
+
+        Response res = hospitalizationController.solicitarHospitalizacion(hospId, this.patient, selectedDoctor, dateStr, reason, selectedRoom, observations
+        );
     }//GEN-LAST:event_CreateHospitalizationButtonActionPerformed
 
     private void GenderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GenderButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_GenderButtonActionPerformed
+
+    private void HospitalizationDoctorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HospitalizationDoctorButtonActionPerformed
+        
+    }//GEN-LAST:event_HospitalizationDoctorButtonActionPerformed
 
 
 

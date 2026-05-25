@@ -42,7 +42,7 @@ public class PatientDeserialize implements Deserializable{
         this.email = (String) json.get("email");
         this.birthdate = (String) json.get("birthdate");
         this.gender = (boolean) json.get("gender");
-        this.phone = (long) json.get("phone");
+        this.phone = (long) json.getLong("phone");
         this.address = (String) json.get("address");
         
         Patient p = new Patient(id, username, firstname, lastname, password, email, LocalDate.parse(birthdate), gender, phone, address);

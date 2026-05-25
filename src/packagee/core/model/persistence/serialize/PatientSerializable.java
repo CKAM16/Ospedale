@@ -24,7 +24,7 @@ public class PatientSerializable implements Serializable{
     public HashMap<String, Object> serialize() {
         HashMap<String, Object> serializedData = new HashMap<>();
         
-        serializedData.put("type", this.patient.getClass().toString());
+        serializedData.put("type", "patient");
         serializedData.put("id", this.patient.getId());
         serializedData.put("username", this.patient.getUsername());
         serializedData.put("firstname", this.patient.getFirstname());
@@ -34,7 +34,7 @@ public class PatientSerializable implements Serializable{
         serializedData.put("birthdate", this.patient.getDate());
         serializedData.put("gender", this.patient.getGender());
         serializedData.put("phone", this.patient.getPhone());
-        serializedData.put("addres", this.patient.getAddress());
+        serializedData.put("address", this.patient.getAddress());
 
         return serializedData;
     }

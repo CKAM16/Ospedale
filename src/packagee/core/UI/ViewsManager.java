@@ -38,16 +38,18 @@ public class ViewsManager {
    
     }
     
-    public void goToDoctorView(){
+    public void goToDoctorView(User user){
         
         this.MainMenu.setVisible(false);
         this.DoctorView.setVisible(true);
         this.PatientView.setVisible(false);
         this.AdminView.setVisible(false);
         
+        DoctorView.setDoctor((Doctor)user);
+        
     }
     
-    public void goToAdminView(){
+    public void goToAdminView(User user){
         
         this.MainMenu.setVisible(false);
         this.DoctorView.setVisible(false);
@@ -56,22 +58,24 @@ public class ViewsManager {
         
     }
     
-    public void goToPatientView(){
+    public void goToPatientView(User user){
         
         this.MainMenu.setVisible(false);
         this.DoctorView.setVisible(false);
         this.PatientView.setVisible(true);
         this.AdminView.setVisible(false);
         
+        PatientView.setPatient((Patient)user);
+        
     }
     public void navigateAfterLogin(User user) {
         
         if (user instanceof Doctor) {
-            goToDoctorView();
+            goToDoctorView(user);
         } else if (user instanceof Patient) {
-            goToPatientView();
+            goToPatientView(user);
         } else if (user instanceof Administrator) {
-            goToAdminView();
+            goToAdminView(user);
         }
     }
     public void goBackAdmin(){

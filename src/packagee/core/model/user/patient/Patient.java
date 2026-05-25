@@ -106,4 +106,8 @@ public class Patient extends User {
     public boolean getGender(){
         return this.gender;
     }  
+
+    public String getHospitalizations() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

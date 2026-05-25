@@ -234,16 +234,40 @@
         "lastname": "Ibarra"
     },
     {
-        "firstname": "a",
+        "firstname": "aaa",
         "password": "1",
-        "birthdate": "1002-04-04",
+        "birthdate": "1004-10-20",
+        "address": "112",
         "gender": false,
-        "phone": 3014461077,
-        "addres": "aaa",
-        "id": 111111111111,
-        "type": "class packagee.core.model.user.patient.Patient",
-        "email": "a@g.com",
-        "username": "aaa1",
-        "lastname": "a"
+        "phone": 1234569891,
+        "id": 123456789112,
+        "type": "patient",
+        "email": "a@gm.com",
+        "username": "er",
+        "lastname": "aaa"
+    },
+    {
+        "firstname": "eeee",
+        "password": "1234",
+        "birthdate": "2023-12-12",
+        "address": "aaa",
+        "gender": true,
+        "phone": 1112223344,
+        "id": 112332111111,
+        "type": "patient",
+        "email": "a@ge.c",
+        "username": "user",
+        "lastname": "eeee"
+    },
+    {
+        "firstname": "aa",
+        "password": "1",
+        "specialty": "PEDIATRICS",
+        "licenceNumber": "L-1234567190 MTL",
+        "id": 123456789101,
+        "assignedOffice": "O-100",
+        "type": "doctor",
+        "username": "juanAAA",
+        "lastname": "aa"
     }
 ]}

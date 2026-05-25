@@ -11,8 +11,12 @@ import packagee.core.model.user.patient.Patient;
 import packagee.core.model.user.doctor.Doctor;
 import packagee.core.model.appointment.Appointment;
 import java.awt.Color;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import packagee.core.controllers.*;
+import packagee.core.model.persistence.Storage;
 
 /**
  *
@@ -45,6 +49,8 @@ public class AdminViewPanel extends javax.swing.JFrame {
         
         this.setBackground(new Color(0, 0, 0, 0));
         this.setLocationRelativeTo(null);
+        
+        this.ComboBoxes();
     }
     public void setViewManager(ViewsManager viewManager){
         this.viewManager = viewManager;
@@ -434,26 +440,49 @@ public class AdminViewPanel extends javax.swing.JFrame {
         String firstname = DoctorFirstNameInput.getText();
         String lastname = DoctorLastNameInput.getText();
         String id = DoctorIDInput.getText();
-        String spec = SpecialtyButton.getItemAt(SpecialtyButton.getSelectedIndex());
+        String spec = SpecialtyButton.getItemAt(SpecialtyButton.getSelectedIndex()).toUpperCase();
         String licenseNumber = LicenseNumberInput.getText();
         String assignedOffice = AssignedOfficeDoctorInput.getText();
         String username = AdminUserInput.getText();
         String password = AdminPasswordInput.getText();
         String comPassword = AdminConfirmPasswordInput.getText();
-        Specialty specialty = Specialty.valueOf(spec.replaceAll(" &", "").replaceAll(" ", "_"));
-        
-        doctorController.registrarDoctor(id, username, firstname, lastname, password, spec, licenseNumber, assignedOffice);
+
+        try {
+            doctorController.registrarDoctor(id, username, firstname, lastname, password, spec, licenseNumber, assignedOffice);
+        } catch (IOException ex) {
+            Logger.getLogger(AdminViewPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_SaveDoctorButtonActionPerformed
 
-    private void ViewDoctorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewDoctorButtonActionPerformed
-        String idDoctor = SelectViewedDoctorButton.getItemAt(SelectViewedDoctorButton.getSelectedIndex());
+    private void ComboBoxes(){
+        this.SelectViewedDoctorButton.removeAll();
+        this.SelectViewedPatientButton.removeAll();
         
-        Doctor temp = null;
-        for(User use:this.users){
-            if(String.valueOf(use.getId()) == idDoctor)
-                temp =(Doctor) user;
+        this.SelectViewedDoctorButton.addItem("Select One");
+        this.SelectViewedPatientButton.addItem("Select One");
+        for (User u : Storage.getInstance().getPersons()){
+            if (u instanceof Doctor){
+                SelectViewedDoctorButton.addItem(u.getFirstname()+" "+u.getLastname());
+            }else if(u instanceof Patient){
+                SelectViewedPatientButton.addItem(u.getFirstname() + " "+u.getLastname());
+            }
         }
-        viewManager.goToDoctorView();
+    }
+    private void ViewDoctorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewDoctorButtonActionPerformed
+
+        String selectedItem = (String) SelectViewedDoctorButton.getSelectedItem();
+        
+        Doctor selectedDoctor = null;
+        for (User u : Storage.getInstance().getPersons()) {
+            if (u instanceof Doctor) {
+                String fullName = u.getFirstname() + " " + u.getLastname();
+                if (fullName.equals(selectedItem)) {
+                    selectedDoctor = (Doctor) u;
+                    break;
+                }
+            }
+        }
+        viewManager.goToDoctorView(selectedDoctor);
     }//GEN-LAST:event_ViewDoctorButtonActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
@@ -462,13 +491,19 @@ public class AdminViewPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void PatientViewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PatientViewButtonActionPerformed
-        long idPatient = Long.parseLong(SelectViewedDoctorButton.getItemAt(SelectViewedDoctorButton.getSelectedIndex()));
-        Patient temp = null;
-        for(User use:this.users){
-            if(use.getId() == idPatient)
-                temp =(Patient) user;
+        String selectedItem = (String) SelectViewedDoctorButton.getSelectedItem();
+        
+        Patient selectedPatient = null;
+        for (User u : Storage.getInstance().getPersons()) {
+            if (u instanceof Patient) {
+                String fullName = u.getFirstname() + " " + u.getLastname();
+                if (fullName.equals(selectedItem)) {
+                    selectedPatient = (Patient) u;
+                    break;
+                }
+            }
         }
-        viewManager.goToPatientView();
+        viewManager.goToPatientView(selectedPatient);
     }//GEN-LAST:event_PatientViewButtonActionPerformed
 
 

@@ -25,15 +25,15 @@ public class DoctorSerializable implements Serializable{
     public HashMap<String, Object> serialize() {
         HashMap<String, Object> serializedData = new HashMap<>();
         
-        serializedData.put("type", this.doctor.getClass().toString());
+        serializedData.put("type", "doctor");
         serializedData.put("id", this.doctor.getId());
         serializedData.put("username", this.doctor.getUsername());
         serializedData.put("firstname", this.doctor.getFirstname());
         serializedData.put("lastname", this.doctor.getLastname());
         serializedData.put("password", this.doctor.getPassword());
         serializedData.put("specialty", this.doctor.getSpecialty());
-        serializedData.put("license number", this.doctor.getLicenceNumber());
-        serializedData.put("office", this.doctor.getAssignedOffice());
+        serializedData.put("licenceNumber", this.doctor.getLicenceNumber());
+        serializedData.put("assignedOffice", this.doctor.getAssignedOffice());
 
         return serializedData;
     }

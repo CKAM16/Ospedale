@@ -32,7 +32,7 @@ public class main {
         
         LoginController login = new LoginController();
         PatientController patient = new PatientController( jsonsave);
-        DoctorController doctor = new DoctorController();
+        DoctorController doctor = new DoctorController(jsonsave);
         AdminController admin = new AdminController();
         HospitalizationController hosp = new HospitalizationController();
         AppointmentController appoint = new AppointmentController();
