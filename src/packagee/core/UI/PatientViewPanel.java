@@ -998,4 +998,8 @@ public class PatientViewPanel extends javax.swing.JFrame {
     private packagee.core.UI.PanelRound panelRound1;
     private packagee.core.UI.PanelRound panelRound2;
     // End of variables declaration//GEN-END:variables
+
+    public void setViewManager(ViewsManager UI) {
+       this.viewManager = UI;
+    }
 }

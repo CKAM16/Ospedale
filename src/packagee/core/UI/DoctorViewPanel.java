@@ -19,6 +19,11 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
+import packagee.core.controllers.AdminController;
+import packagee.core.controllers.AppointmentController;
+import packagee.core.controllers.DoctorController;
+import packagee.core.controllers.HospitalizationController;
+import packagee.core.controllers.PatientController;
 
 /**
  *
@@ -34,7 +39,15 @@ public class DoctorViewPanel extends javax.swing.JFrame {
     private ArrayList<Appointment>appointments;
     private Doctor doctor;
     private Patient patient;
-    public DoctorViewPanel() {
+    
+    private PatientController patientController;
+    private DoctorController doctorController;
+    private AppointmentController appointmentController;
+    private HospitalizationController hospitalizationController;
+    private AdminController adminController;
+    private ViewsManager viewManager;
+    
+    public DoctorViewPanel(PatientController patient1, DoctorController doctor1, AppointmentController appoint, HospitalizationController hosp, AdminController admin) {
         initComponents();
        // this.user = user;
        // this.users =users;
@@ -45,6 +58,12 @@ public class DoctorViewPanel extends javax.swing.JFrame {
            // jButton11.setVisible(true);
        // else    
           //  jButton11.setVisible(false);
+          
+        this.patientController = patientController;
+        this.doctorController = doctorController;
+        this.adminController = adminController;
+        this.appointmentController = appointmentController;
+        this.hospitalizationController = hospitalizationController;
         this.setBackground(new Color(0, 0, 0, 0));
         this.setLocationRelativeTo(null);
     }
@@ -1399,4 +1418,8 @@ public class DoctorViewPanel extends javax.swing.JFrame {
     private packagee.core.UI.PanelRound panelRound1;
     private packagee.core.UI.PanelRound panelRound2;
     // End of variables declaration//GEN-END:variables
+
+     public void setViewManager(ViewsManager UI) {
+       this.viewManager = UI;
+    }
 }
