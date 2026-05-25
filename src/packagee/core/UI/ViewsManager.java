@@ -4,6 +4,11 @@
  */
 package packagee.core.UI;
 
+import packagee.core.model.user.User;
+import packagee.core.model.user.admin.Administrator;
+import packagee.core.model.user.doctor.Doctor;
+import packagee.core.model.user.patient.Patient;
+
 /**
  *
  * @author harry
@@ -57,6 +62,17 @@ public class ViewsManager {
         this.DoctorView.setVisible(false);;
         this.PatientView.setVisible(true);;
         this.AdminView.setVisible(false);;
+        
+    }
+    public void navigateAfterLogin(User user) {
+        
+        if (user instanceof Doctor) {
+            goToDoctorView();
+        } else if (user instanceof Patient) {
+            goToPatientView();
+        } else if (user instanceof Administrator) {
+            goToAdminView();
+        }
         
     }
     

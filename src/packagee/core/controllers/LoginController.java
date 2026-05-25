@@ -13,17 +13,26 @@ import packagee.core.model.user.User;
  * @author paaoo
  */
 public class LoginController {
+    
+    private User loggedUser;
+    
     public Response login(String username, String password) {
-        for (User u : Storage.getInstance().persons) {
+        for (User u : Storage.getInstance().getPersons()) {
+
             if (u.getUsername().equals(username) && u.getPassword().equals(password)) {
+                loggedUser = u;
                 return new Response("SUCCESS", u.getClass().toString());
             }
         }
+        System.out.println("NOOB");
         return new Response("ERROR", "Usuario o contraseña incorrectos");
     }
 
     public Response logout() {
         return new Response("SUCCESS", "Sesión cerrada correctamente");
+    }
+    public User getLoggedUser(){
+        return this.loggedUser;
     }
 }
 

@@ -12,6 +12,7 @@ import packagee.core.model.user.doctor.Doctor;
 import packagee.core.model.appointment.Appointment;
 import java.awt.Color;
 import java.util.ArrayList;
+import packagee.core.controllers.*;
 
 /**
  *
@@ -25,14 +26,28 @@ public class AdminViewPanel extends javax.swing.JFrame {
     private ArrayList<Appointment>appointments;
     private ArrayList<Hospitalization>hospitalizations;
     private User user;
-    public AdminViewPanel() {
+    
+    private PatientController patientController;
+    private DoctorController doctorController;
+    private AppointmentController appointmentController;
+    private HospitalizationController hospitalizationController;
+    private AdminController adminController;
+    private ViewsManager viewManager;
+    
+    public AdminViewPanel(PatientController patientController, DoctorController doctorController, AppointmentController appointmentController, HospitalizationController hospitalizationController, AdminController adminController) {
         initComponents();
-        //this.user = user;
-        //this.users = users;
-        //this.hospitalizations = hospitalizations;
-        //this.appointments = appointments;
+        
+        this.patientController = patientController;
+        this.doctorController = doctorController;
+        this.adminController = adminController;
+        this.appointmentController = appointmentController;
+        this.hospitalizationController = hospitalizationController;
+        
         this.setBackground(new Color(0, 0, 0, 0));
         this.setLocationRelativeTo(null);
+    }
+    public void setViewManager(ViewsManager viewManager){
+        this.viewManager = viewManager;
     }
 
     /**
@@ -418,7 +433,7 @@ public class AdminViewPanel extends javax.swing.JFrame {
     private void SaveDoctorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveDoctorButtonActionPerformed
         String firstname = DoctorFirstNameInput.getText();
         String lastname = DoctorLastNameInput.getText();
-        long id = Long.parseLong(DoctorIDInput.getText());
+        String id = DoctorIDInput.getText();
         String spec = SpecialtyButton.getItemAt(SpecialtyButton.getSelectedIndex());
         String licenseNumber = LicenseNumberInput.getText();
         String assignedOffice = AssignedOfficeDoctorInput.getText();
@@ -426,16 +441,16 @@ public class AdminViewPanel extends javax.swing.JFrame {
         String password = AdminPasswordInput.getText();
         String comPassword = AdminConfirmPasswordInput.getText();
         Specialty specialty = Specialty.valueOf(spec.replaceAll(" &", "").replaceAll(" ", "_"));
-        if (password.equals(comPassword)) {
-            users.add(new Doctor(id, username, firstname, lastname, password, specialty, licenseNumber, assignedOffice));
-        }
+        
+        doctorController.registrarDoctor(id, username, firstname, lastname, password, spec, licenseNumber, assignedOffice);
     }//GEN-LAST:event_SaveDoctorButtonActionPerformed
 
     private void ViewDoctorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewDoctorButtonActionPerformed
-        long idDoctor = Long.parseLong(SelectViewedDoctorButton.getItemAt(SelectViewedDoctorButton.getSelectedIndex()));
+        String idDoctor = SelectViewedDoctorButton.getItemAt(SelectViewedDoctorButton.getSelectedIndex());
+        
         Doctor temp = null;
         for(User use:this.users){
-            if(use.getId() == idDoctor)
+            if(String.valueOf(use.getId()) == idDoctor)
                 temp =(Doctor) user;
         }
         DoctorViewPanel doctor = new DoctorViewPanel();
@@ -445,9 +460,9 @@ public class AdminViewPanel extends javax.swing.JFrame {
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
         
-        MainMenu login = new MainMenu();
+        //MainMenu a = new MainMenu();
         this.setVisible(false);
-        login.setVisible(true);
+       // a.setVisible(true);
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void PatientViewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PatientViewButtonActionPerformed

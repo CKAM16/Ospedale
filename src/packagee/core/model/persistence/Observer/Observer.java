@@ -18,7 +18,7 @@ public abstract class Observer {
         this.observable = null;
     }
     
-    public abstract void notify(User user);
+    public abstract void notify(User user, Object obj);
     
     public void setObservable(Observable observable) {
         this.observable = observable;

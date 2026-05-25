@@ -4,11 +4,13 @@
  */
 package packagee.core.model.user;
 
+import packagee.core.model.persistence.Observer.Observable;
+
 /**
  *
  * @author edangulo
  */
-public abstract class User {
+public abstract class User extends Observable{
     
     protected final long id;
     protected String username;
@@ -33,6 +35,8 @@ public abstract class User {
     protected String password;
 
     public User(long id, String username, String firstname, String lastname, String password) {
+        super();
+        
         this.id = id;
         this.username = username;
         this.firstname = firstname;

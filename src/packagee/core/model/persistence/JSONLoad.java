@@ -20,6 +20,10 @@ public class JSONLoad {
     
     private ArrayList<Deserializable> deserializables = new ArrayList<>();
     private Storage storage;
+    
+    public JSONLoad(Storage storage){
+        this.storage = storage;
+    }
             
     public void load(String path) throws IOException {
         String content = new String(Files.readAllBytes(Paths.get(path)));
@@ -31,7 +35,9 @@ public class JSONLoad {
             JSONObject object = users.getJSONObject(i);
             
             for (Deserializable d : deserializables){
-                if (d.getType() == object.get("Type")){
+                
+                if (d.getType().equals(object.getString("type"))){
+                    System.out.println(d.user(object).getUsername());
                     storage.addPerson(d.user(object));
                 }
             }

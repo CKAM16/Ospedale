@@ -828,15 +828,15 @@ public class PatientViewPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        MainMenu login = new MainMenu();
+        //MainMenu login = new MainMenu();
         this.setVisible(false);
-        login.setVisible(true);
+       // login.setVisible(true);
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
-        AdminViewPanel admin = new AdminViewPanel();
+        //AdminViewPanel admin = new AdminViewPanel();
         this.setVisible(false);
-        admin.setVisible(true);
+        //admin.setVisible(true);
     }//GEN-LAST:event_BackButtonActionPerformed
 
     private void SpecialtyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SpecialtyButtonActionPerformed

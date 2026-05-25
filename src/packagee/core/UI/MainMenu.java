@@ -12,10 +12,16 @@ import packagee.core.model.user.doctor.Doctor;
 import packagee.core.model.appointment.Appointment;
 import com.formdev.flatlaf.FlatDarkLaf;
 import java.awt.Color;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.UIManager;
+import packagee.core.controllers.LoginController;
+import packagee.core.controllers.PatientController;
+import packagee.core.controllers.util.Response;
 
 /**
  *
@@ -25,17 +31,29 @@ import javax.swing.UIManager;
 public class MainMenu extends javax.swing.JFrame {
 
     private int x, y;
+    
+    private LoginController login;
+    private PatientController register;
+    private ViewsManager viewsManager;
+    
     private ArrayList<User> users;
     private ArrayList<Hospitalization> hospitalizations;
     private ArrayList<Appointment> appointments;
 
-    public MainMenu() {
+    public MainMenu(PatientController register, LoginController login) {
         initComponents();
         this.setBackground(new Color(0, 0, 0, 0));
         this.setLocationRelativeTo(null);
-
+        
+        this.register = register;
+        this.login = login;
+        this.viewsManager = viewsManager;
+        
         this.users = new ArrayList<>();
         this.users.add(new Administrator(0, "admin", "admin", "adnim", "admin123"));
+    }
+    public void setViewManager(ViewsManager viewsManager){
+        this.viewsManager = viewsManager;
     }
 
     /**
@@ -431,28 +449,13 @@ public class MainMenu extends javax.swing.JFrame {
 
     private void LogInButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogInButtonActionPerformed
         // TODO add your handling code here:
-        User selectedUser = null;
-        for (User user : this.users) {
-            if (UserInput.getText().equals(user.getUsername())) {
-                selectedUser = user;
-                if (selectedUser.getPassword().equals(PasswordInput.getText())) {
-                    if (selectedUser instanceof Administrator ) {
-                        AdminViewPanel admin = new AdminViewPanel();
-                        this.setVisible(false);
-                        admin.setVisible(true);
-                    }
-                    else if (selectedUser instanceof Doctor ) {
-                        DoctorViewPanel doctor = new DoctorViewPanel();
-                        this.setVisible(false);
-                        doctor.setVisible(true);
-                    }
-                    else {
-                        PatientViewPanel patient = new PatientViewPanel();
-                        this.setVisible(false);
-                        patient.setVisible(true);
-                    }
-                }
-            }
+        String username = UserInput.getText();
+        String password = PasswordInput.getText();
+        
+        Response response = login.login(username, password);
+        
+        if ("SUCCESS".equals(response.getStatus())) {
+            viewsManager.navigateAfterLogin(login.getLoggedUser());
         }
 
     }//GEN-LAST:event_LogInButtonActionPerformed
@@ -460,20 +463,21 @@ public class MainMenu extends javax.swing.JFrame {
     private void RegisterUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterUserActionPerformed
         String firstname = FirstNameInput.getText();
         String lastname = LastNameInput.getText();
-        long id = Long.parseLong(IDInput.getText());
-        boolean gender = (GenderButton.getSelectedIndex() == 0 ? null : (GenderButton.getSelectedIndex() == 1 ));
+        String id = IDInput.getText();
+        String gender = String.valueOf(GenderButton.getSelectedIndex());
         String birth = Birthdatebutton.getText();
         String address = AddressInput.getText();
-        long phone = Long.parseLong(PhoneInput.getText());
+        String phone = PhoneInput.getText();
         String email = EmailInput.getText();
         String user = RegisterUserInput.getText();
         String password = RegisterPasswordInput.getText();
         String comPassword = RegisterConfirmPasswordInput.getText();
-        LocalDate birthdate = LocalDate.of(Integer.parseInt(birth.substring(0, 4)), Integer.parseInt(birth.substring(5, 7)), Integer.parseInt(birth.substring(8)));
-        if (comPassword.equals(password)) {
-            users.add(new Patient(id, user, firstname, lastname, password, email, birthdate, gender, phone, address));
+
+        try {
+            register.registrarPaciente(id, firstname, lastname,gender, birth, address, phone, email, user, password, comPassword);
+        } catch (IOException ex) {
+            Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
     }//GEN-LAST:event_RegisterUserActionPerformed
 
     private void RegisterConfirmPasswordInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterConfirmPasswordInputActionPerformed

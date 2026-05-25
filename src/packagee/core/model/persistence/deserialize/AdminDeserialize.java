@@ -23,7 +23,7 @@ public class AdminDeserialize implements Deserializable{
     @Override
     public User user(JSONObject json) {
         
-        this.id = (int) json.get("id");
+        this.id = (long) json.get("id");
         this.username = (String) json.get("username");
         this.firstname = (String) json.get("firstname");
         this.lastname = (String) json.get("lastname");
@@ -35,7 +35,7 @@ public class AdminDeserialize implements Deserializable{
 
     @Override
     public String getType(){
-        return "Administrator";
+        return "admin";
     }
     
 }

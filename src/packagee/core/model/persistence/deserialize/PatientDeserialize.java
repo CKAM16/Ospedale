@@ -25,7 +25,7 @@ public class PatientDeserialize implements Deserializable{
     private String password;
     
     private String email;
-    private LocalDate birthdate;
+    private String birthdate;
     private boolean gender;
     private long phone;
     private String address;
@@ -33,24 +33,24 @@ public class PatientDeserialize implements Deserializable{
     @Override
     public User user(JSONObject json) {
         
-        this.id = (int) json.get("id");
+        this.id = (long) json.get("id");
         this.username = (String) json.get("username");
         this.firstname = (String) json.get("firstname");
         this.lastname = (String) json.get("lastname");
         this.password = (String) json.get("password");
         
         this.email = (String) json.get("email");
-        this.birthdate = (LocalDate) json.get("birthdate");
+        this.birthdate = (String) json.get("birthdate");
         this.gender = (boolean) json.get("gender");
         this.phone = (long) json.get("phone");
         this.address = (String) json.get("address");
         
-        Patient p = new Patient(id, username, firstname, lastname, password, email, birthdate, gender, phone, address);
+        Patient p = new Patient(id, username, firstname, lastname, password, email, LocalDate.parse(birthdate), gender, phone, address);
         return p;
     }
     @Override
     public String getType(){
-        return "Patient";
+        return "patient";
     }
     
 }

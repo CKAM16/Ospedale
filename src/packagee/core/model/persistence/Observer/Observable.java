@@ -25,10 +25,10 @@ public abstract class Observable {
         System.out.println(observer + " is observing " + this);
         return true;
     }
-    
-    protected void notifyAll(User user) {
+
+    public void notifyAll(User user, Object obj) {
         for (Observer observer : this.observers) {
-            observer.notify(user);
+            observer.notify(user, obj);
         }
     }
 }

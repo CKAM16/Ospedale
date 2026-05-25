@@ -17,6 +17,26 @@ import packagee.core.model.hospitalization.Hospitalization;
 public class Patient extends User {
     
     private String email;
+
+    public void setAppointments(ArrayList<Appointment> appointments) {
+        this.appointments = appointments;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
     private LocalDate birthdate;
     private boolean gender;
     private long phone;
@@ -58,6 +78,7 @@ public class Patient extends User {
 
     public Patient(long id, String username, String firstname, String lastname, String password, String email, LocalDate birthdate, boolean gender, long phone, String address) {
         super(id, username, firstname, lastname, password);
+
         this.email = email;
         this.birthdate = birthdate;
         this.gender = gender;
@@ -84,6 +105,5 @@ public class Patient extends User {
     
     public boolean getGender(){
         return this.gender;
-    }
-    
+    }  
 }

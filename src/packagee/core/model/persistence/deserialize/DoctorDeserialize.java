@@ -26,29 +26,29 @@ public class DoctorDeserialize implements Deserializable{
     private String lastname;
     private String password;
     
-    private Specialty specialty;
+    private String specialty;
     private String licenceNumber;
     private String assignedOffice;
 
     @Override
     public User user(JSONObject json) {
         
-        this.id = (int) json.get("id");
+        this.id = (long) json.get("id");
         this.username = (String) json.get("username");
         this.firstname = (String) json.get("firstname");
         this.lastname = (String) json.get("lastname");
         this.password = (String) json.get("password");
         
-        this.specialty = (Specialty) json.get("specialty");
+        this.specialty = (String) json.get("specialty");
         this.licenceNumber = (String) json.get("licenceNumber");
         this.assignedOffice = (String) json.get("assignedOffice");
         
-        Doctor d = new Doctor(id, username, firstname, lastname, password, specialty, licenceNumber, assignedOffice);
+        Doctor d = new Doctor(id, username, firstname, lastname, password, Specialty.valueOf(specialty), licenceNumber, assignedOffice);
         return d;
     }
     @Override
     public String getType(){
-        return "Doctor";
+        return "doctor";
     }
     
 }
